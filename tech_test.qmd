@@ -1,0 +1,36 @@
+---
+title: "SDOP at APPA"
+subtitle: "tech test"
+multiplex: true
+format: revealjs
+---
+
+## Tech Test
+
+```{=html}
+<iframe src="https://app.sli.do/event/cmtgGCV22esJnbGgRBJwcD" height="100%" width="100%" frameBorder="0" style="min-height: 560px;" allow="clipboard-write" title="Slido"></iframe>
+```
+
+## Old
+
+![](imgs/IMG_8387.jpeg)
+
+## 
+
+```{r}
+
+sqrt(25)
+
+```
+
+## Map
+
+```{r}
+library(leaflet)
+
+leaflet() %>%
+  addTiles() %>%
+  setView(lat = 41.85003, lng = -87.65005, zoom = 11) %>%
+  addProviderTiles(providers$OpenTopoMap)
+
+```
