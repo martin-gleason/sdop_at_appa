@@ -1,9 +1,9 @@
 ---
 title: "SDOP at APPA"
 subtitle: "tech test"
-multiplex: true
 format: 
   revealjs:
+    chalkboard: true
     theme: simple
 ---
 
