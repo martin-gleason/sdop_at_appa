@@ -2,26 +2,16 @@
 title: "SDOP at APPA"
 subtitle: "tech test"
 multiplex: true
-format: revealjs
+format: 
+  revealjs:
+    theme: simple
 ---
 
-## Tech Test
+## Presenter info
 
-```{=html}
-<iframe src="https://app.sli.do/event/cmtgGCV22esJnbGgRBJwcD" height="100%" width="100%" frameBorder="0" style="min-height: 560px;" allow="clipboard-write" title="Slido"></iframe>
-```
+## History of SDOP
 
-## Old
-
-![](imgs/IMG_8387.jpeg)
-
-## 
-
-```{r}
-
-sqrt(535)
-
-```
+-   30 seconds of Social Determinants of Health
 
 ## Map
 
@@ -34,3 +24,55 @@ leaflet() %>%
   addProviderTiles(providers$OpenTopoMap)
 
 ```
+
+## Goal of SDOP
+
+### What we want to accomplish with SDOP
+
+## Categories of SDOP
+
+![](imgs/sdop_v2.PNG)
+
+## QR Code
+
+![](imgs/qr_tech_test.png)
+
+*Take a picture and go to this high tech link!*
+
+## Audience Participation #1 test
+
+```{=html}
+<iframe src="https://app.sli.do/event/cmtgGCV22esJnbGgRBJwcD" height="150%" width="150%" frameBorder="0" style="min-height: 560px;" allow="clipboard-write" title="Slido"></iframe>
+```
+
+## Image Test 2
+
+![](imgs/IMG_8387.jpeg)
+
+## Code Test
+
+```{r}
+
+sqrt(535)
+
+print("Factorial 10")
+factorial(10)
+
+```
+
+## Activity 2: thoughts
+
+-   Second Slido
+-   Add your words
+
+## Activity 2: Test
+
+```{=html}
+<iframe src='https://app.sli.do/event/5rwPvLPJHBARnpiscsoE4o/embed/polls/455e4327-03c7-416e-9d87-dcb1a64a72fa' width='300' height='400'></iframe>
+```
+
+## Presentation Points
+
+-   Present the history of SDOP
+-   Discuss implementation
+    -   including our struggles
