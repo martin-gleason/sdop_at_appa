@@ -7,7 +7,17 @@ format:
     theme: simple
 ---
 
-## Presenter info
+## Presenter Info
+
+::::: columns
+::: {.column width="50%"}
+![](imgs/presener_info.jpeg)
+:::
+
+::: {.column width="50%"}
+![](imgs/deputies.jpeg)
+:::
+:::::
 
 ## History of SDOP
 
@@ -17,11 +27,15 @@ format:
 
 ```{r}
 library(leaflet)
+library(sf)
+library(here)
+
+muni <- read_sf(here("shapefiles", "Municipality.geojson"))
 
 leaflet() %>%
   addTiles() %>%
-  setView(lat = 41.85003, lng = -87.65005, zoom = 11) %>%
-  addProviderTiles(providers$OpenTopoMap)
+  addPolygons(data = muni) %>%
+  setView(lat = 41.85003, lng = -87.65005, zoom = 10)
 
 ```
 
@@ -75,4 +89,4 @@ factorial(10)
 
 -   Present the history of SDOP
 -   Discuss implementation
-    -   including our struggles
+    -   including our struggles :::::
