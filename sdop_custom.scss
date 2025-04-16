@@ -1,0 +1,29 @@
+/*-- scss:defaults --*/
+
+// fonts
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+//colors
+$black: #061826 !default;
+$basic: #1C110A !default;
+$beige: #E4D6A7 !default;
+$red: #9B2915 !default;
+$blue: #50A2A7 !default;
+$yellow: #E9B44C !default;
+$deep-blue: #0006b1!default;
+$green: #228B22!default;
+$teal: #008080!default;
+
+$body-color: $basic;
+$headings-color: $teal;
+
+
+// headings
+$presentation-heading-font: "Montserrat";
+
+/*-- scss:rules --*/
+
+.reveal .slide blockquote {
+  border-left: 3px solid $text-muted;
+  padding-left: 0.5em;
+}

@@ -1,11 +1,23 @@
 ---
 title: "SDOP at APPA"
-subtitle: "tech test"
+author: 
+  - "Dr Kisha Roberts-Tabb"
+  - "Marty Gleason"
+title-slide-attributes: 
+  data-background-image: imgs/sdop_logo.svg
 format: 
   revealjs:
+    pagetitle: "SDOP at APPA: page-title"
     chalkboard: true
-    theme: simple
+    theme: 
+      - simple
+      - sdop_custom.scss
+    slide-number: true
 ---
+
+## 
+
+![](imgs/sdop_logo.png)
 
 ## Presenter Info
 
@@ -89,4 +101,6 @@ factorial(10)
 
 -   Present the history of SDOP
 -   Discuss implementation
-    -   including our struggles :::::
+    -   including our struggles
+
+## Thank you!
