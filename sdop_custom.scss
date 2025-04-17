@@ -29,20 +29,15 @@ $presentation-heading-font: "Montserrat";
   padding-left: 0.5em;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: $red;
-  text-shadow: -1px -1px 0 rgba(0, 0, 0, .3);
-}
-
 .reveal h1 {
   font: "Montserrat";
   left: "55%" ;
   top: "55%"; 
-  padding: 0.5em 1em; 
+  padding: 0.3em .5em; 
   background-color: rgba(255, 255, 255, .5); 
   backdrop-filter: blur(5px); 
   box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5); 
-  border-radius: 5px;
+  border-radius: 3px;
 }
 
 .reveal .slides section.quarto-title-block {

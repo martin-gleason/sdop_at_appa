@@ -16,11 +16,7 @@ format:
     slide-number: true
 ---
 
-## 
-
-![](imgs/sdop_logo.png)
-
-## Presenter Info
+## Who are we
 
 ::::: columns
 ::: {.column width="50%"}
@@ -32,9 +28,27 @@ format:
 :::
 :::::
 
-## History of SDOP
+## History of the Social Determinants Of Probation
 
--   30 seconds of Social Determinants of Health
+::::: columns
+::: {.column width="40%"}
+-   [Social determinants of health (SDOH) are the nonmedical factors that influence health outcomes.](https://www.cdc.gov/about/priorities/why-is-addressing-sdoh-important.html#:~:text=A%20SDOH%2C%20including%20the%20effects,education%2C%20wealth%2C%20and%20employment.)
+
+-   Cook County Juvenile Court explored collecting this data in 2022
+
+-   Issues arose immediately
+:::
+
+::: {.column width="60%"}
+![Image from the CDC Public Health professionals Gateway](imgs/sdoh_image.png)
+:::
+:::::
+
+## 
+
+::: {.r-fit-text .center}
+**Probation and Court Services are Not Health Care Professionals**
+:::
 
 ## Map
 
