@@ -1,5 +1,6 @@
 ---
-title: "SDOP at APPA"
+title: "Social Determinants of Probation"
+subtitle: "Going Beyond Acturial Risk Tools"
 author: 
   - "Dr Kisha Roberts-Tabb"
   - "Marty Gleason"
