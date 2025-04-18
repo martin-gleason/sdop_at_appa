@@ -40,6 +40,18 @@ $presentation-heading-font: "Montserrat";
   border-radius: 3px;
 }
 
+.reveal .slide ul li {
+  font-size: 1.75rem;
+}
+
+.reveal .slide figure figcaption {
+  font-style: italic;
+  font-size: .65em;
+  text-align: center;
+}
+
+
+
 .reveal .slides section.quarto-title-block {
   absolute: left;
   left: "55%" ;

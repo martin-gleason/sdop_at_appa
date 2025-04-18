@@ -20,29 +20,34 @@ format:
 
 ::::: columns
 ::: {.column width="50%"}
-![](imgs/presener_info.jpeg)
+![Deputy Chief Probation Officer Dr Kisha Roberts-Tabb](imgs/kisha_pic.jpeg)
 :::
 
 ::: {.column width="50%"}
-![](imgs/deputies.jpeg)
+![Deputy Chief Probation Officer Martin Gleason](imgs/marty_pic.jpeg){width="83%"}
 :::
 :::::
 
 ## History of the Social Determinants Of Probation
 
-::::: columns
-::: {.column width="40%"}
+:::::: columns
+::: {.column width="45%"}
 -   [Social determinants of health (SDOH) are the nonmedical factors that influence health outcomes.](https://www.cdc.gov/about/priorities/why-is-addressing-sdoh-important.html#:~:text=A%20SDOH%2C%20including%20the%20effects,education%2C%20wealth%2C%20and%20employment.)
 
 -   Cook County Juvenile Court explored collecting this data in 2022
 
--   Issues arose immediately
+-   We already collect a lot of this data
+
+-   What matters is how we use it
 :::
 
-::: {.column width="60%"}
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
 ![Image from the CDC Public Health professionals Gateway](imgs/sdoh_image.png)
 :::
-:::::
+::::::
 
 ## 
 
@@ -50,18 +55,24 @@ format:
 **Probation and Court Services are Not Health Care Professionals**
 :::
 
-## Map
+## Cook County Municipalities
 
 ```{r}
 library(leaflet)
 library(sf)
 library(here)
 
-muni <- read_sf(here("shapefiles", "Municipality.geojson"))
+muni <- read_sf(here("shapefiles", "Municipality.geojson")) %>%
+  st_transform(crs = 4326)
 
 leaflet() %>%
   addTiles() %>%
-  addPolygons(data = muni) %>%
+  addPolygons(data = muni,
+              color = "black",
+              weight = 2,
+              opacity = 0.4,
+              fillOpacity = 0,
+              label = muni$MUNICIPALITY) %>%
   setView(lat = 41.85003, lng = -87.65005, zoom = 10)
 
 ```
