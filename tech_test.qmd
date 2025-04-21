@@ -16,11 +16,11 @@ format:
     slide-number: true
 ---
 
-## Who are we
+## Who are we {.head_shot}
 
 ::::: columns
 ::: {.column width="50%"}
-![Deputy Chief Probation Officer Dr Kisha Roberts-Tabb](imgs/kisha_pic.jpeg)
+![Deputy Chief Probation Officer Dr. Kisha Roberts-Tabb](imgs/kisha_pic.jpeg)
 :::
 
 ::: {.column width="50%"}
@@ -51,9 +51,7 @@ format:
 
 ## 
 
-::: {.r-fit-text .center}
-**Probation and Court Services are Not Health Care Professionals**
-:::
+### Probation and Court Services are Not Health Care Professionals
 
 ## Cook County Municipalities
 

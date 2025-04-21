@@ -1,21 +1,14 @@
+/*-- scss:uses --*/
+@use "./_styles.scss" as s;
+
 /*-- scss:defaults --*/
 
 // fonts
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-//colors
-$black: #061826 !default;
-$basic: #1C110A !default;
-$beige: #E4D6A7 !default;
-$red: #9B2915 !default;
-$blue: #50A2A7 !default;
-$yellow: #E9B44C !default;
-$deep-blue: #0006b1!default;
-$green: #228B22!default;
-$teal: #008080!default;
 
-$body-color: $basic;
-$headings-color: $teal;
+$body-color: s.get-color("black");
+$headings-color: s.get-color(red);
 
 
 // headings
@@ -29,10 +22,22 @@ $presentation-heading-font: "Montserrat";
   padding-left: 0.5em;
 }
 
-.reveal h1 {
+.head_shot {
+  text-align: center;
+  
+  figcaption {
+    color: get-colors(deep-blue);
+    font-style: italic;
+    font-size: .65em;
+
+  }
+}
+
+.reveal h1, h2 {
   font: "Montserrat";
   left: "55%" ;
   top: "55%"; 
+  color: s.get-color("red");
   padding: 0.3em .5em; 
   background-color: rgba(255, 255, 255, .5); 
   backdrop-filter: blur(5px); 
@@ -43,14 +48,6 @@ $presentation-heading-font: "Montserrat";
 .reveal .slide ul li {
   font-size: 1.75rem;
 }
-
-.reveal .slide figure figcaption {
-  font-style: italic;
-  font-size: .65em;
-  text-align: center;
-}
-
-
 
 .reveal .slides section.quarto-title-block {
   absolute: left;

@@ -16,6 +16,7 @@
 
 // quarto-scss-analysis-annotation { "origin": "'use' section from user-defined SCSS" }
 
+@use "./_styles.scss" as s;
 
 
 // quarto-scss-analysis-annotation { "origin": "'functions' section from format" }
@@ -80,19 +81,9 @@
 // fonts
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-//colors
-$black: #061826 !default;
-$basic: #1C110A !default;
-$beige: #E4D6A7 !default;
-$red: #9B2915 !default;
-$blue: #50A2A7 !default;
-$yellow: #E9B44C !default;
-$deep-blue: #0006b1!default;
-$green: #228B22!default;
-$teal: #008080!default;
 
-$body-color: $basic;
-$headings-color: $teal;
+$body-color: s.$basic;
+$headings-color: s.$teal;
 
 
 // headings
@@ -2624,20 +2615,49 @@ $presentation-author-block-padding-right: if(
   padding-left: 0.5em;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: $red;
-  text-shadow: -1px -1px 0 rgba(0, 0, 0, .3);
+.head_shot {
+  text-align: center;
+  
+  figcaption {
+    color: get-colors(deep-blue);
+    font-style: italic;
+    font-size: .65em;
+
+  }
 }
 
 .reveal h1 {
-  left="55%" top="55%" style="font-size:1.8em; 
+  font: "Montserrat";
+  left: "55%" ;
+  top: "55%"; 
+  padding: 0.3em .5em; 
+  background-color: rgba(255, 255, 255, .5); 
+  backdrop-filter: blur(5px); 
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5); 
+  border-radius: 3px;
+}
+
+.reveal .slide ul li {
+  font-size: 1.75rem;
+}
+
+.reveal .slides section.quarto-title-block {
+  absolute: left;
+  left: "55%" ;
+  top: "55%"; 
+  font-size: 1.4rem;
   padding: 0.5em 1em; 
   background-color: rgba(255, 255, 255, .5); 
   backdrop-filter: blur(5px); 
   box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5); 
-  border-radius: 5px;"
+  border-radius: 5px;
 }
+
+.subtitle {
+  font-style: italic;
+  font-size: 1.1rem;
 }
+
 
 
 // quarto-scss-analysis-annotation { "origin": null }
