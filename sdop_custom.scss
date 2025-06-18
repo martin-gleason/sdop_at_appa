@@ -37,7 +37,7 @@ $presentation-heading-font: "Montserrat";
   font: "Montserrat";
   left: "55%" ;
   top: "55%"; 
-  color: s.get-color("red");
+  color: s.get-color("yellow");
   padding: 0.3em .5em; 
   background-color: rgba(255, 255, 255, .5); 
   backdrop-filter: blur(5px); 
@@ -64,5 +64,6 @@ $presentation-heading-font: "Montserrat";
 .subtitle {
   font-style: italic;
   font-size: 1.1rem;
+  font-weight: 800;
 }
 
