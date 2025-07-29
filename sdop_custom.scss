@@ -67,3 +67,9 @@ $presentation-heading-font: "Montserrat";
   font-weight: 800;
 }
 
+.reveal h3 {
+  font-display: strong;
+  color: s.get-color("red");
+  vertical-align: middle;
+  position: absolute;
+}

@@ -51,6 +51,8 @@ format:
 
 ## 
 
+![](imgs/sdop_venn.png)
+
 ### Probation and Court Services are Not Health Care Professionals
 
 ## Cook County Municipalities
@@ -77,11 +79,11 @@ leaflet() %>%
 
 ## Goal of SDOP
 
-### What we want to accomplish with SDOP
+## What we want to accomplish with SDOP
 
 ## Categories of SDOP
 
-![](imgs/sdop_v2.PNG)
+![](imgs/sdop_v2.PNG){fig-align="center"}
 
 ## QR Code
 
