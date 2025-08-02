@@ -1,0 +1,77 @@
+/*-- scss:uses --*/
+@use "./_styles.scss" as s;
+@use "./_agenda-slide.scss" as a;
+
+/*-- scss:defaults --*/
+
+// fonts
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+$body-color: s.get-color("black");
+$headings-color: s.get-color(red);
+
+
+// headings
+$presentation-heading-font: "Montserrat";
+
+
+/*-- scss:rules --*/
+
+.reveal .slide blockquote {
+  border-left: 3px solid $text-muted;
+  padding-left: 0.5em;
+}
+
+.head_shot {
+  text-align: center;
+  
+  figcaption {
+    color: get-colors(deep-blue);
+    font-style: italic;
+    font-size: .65em;
+
+  }
+}
+
+.reveal h1 {
+  font: "Montserrat";
+  left: "55%" ;
+  top: "55%"; 
+  color: s.get-color("deep-blue");
+  padding: 0.3em .5em; 
+  background-color: rgba(255, 255, 255, .5); 
+  backdrop-filter: blur(5px); 
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5); 
+  border-radius: 3px;
+}
+
+.reveal .slide ul li {
+  font-size: 1.75rem;
+}
+
+.reveal .slides section.quarto-title-block {
+  absolute: left;
+  left: "55%" ;
+  top: "55%"; 
+  font-size: 1.4rem;
+  padding: 0.5em 1em; 
+  background-color: rgba(255, 255, 255, .5); 
+  backdrop-filter: blur(5px); 
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5); 
+  border-radius: 5px;
+}
+
+.subtitle {
+  font-style: italic;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+#key-point h3{
+  font-display: strong;
+  color: s.get-color("red");
+  vertical-align: middle;
+  position: absolute;
+  font-size: 4rem;
+}
