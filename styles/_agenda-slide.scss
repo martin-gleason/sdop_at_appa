@@ -1,0 +1,341 @@
+// _agenda-slide.scss
+// 5-Item Agenda Slide Template Module
+
+// ===================================
+// VARIABLES
+// ===================================
+
+// Colors
+$primary-dark: #2c3e50;
+$secondary-gray: #7f8c8d;
+$light-gray: #f5f7fa;
+$medium-gray: #c3cfe2;
+
+// Agenda item colors
+$agenda-colors: (
+  1: (#2c5aa0, #3498db),
+  2: (#27ae60, #58d68d),
+  3: (#f39c12, #f7dc6f),
+  4: (#e67e22, #f8c471),
+  5: (#e74c3c, #ec7063)
+);
+
+// Central circle
+$circle-bg: (#e0e0e0, #f5f5f5);
+$circle-size: 200px;
+
+// Typography
+$font-family: 'Arial', sans-serif;
+$title-size: 2.5rem;
+$central-text-size: 2rem;
+$item-text-size: 1rem;
+$number-size: 4rem;
+$subtext-size: 0.9rem;
+
+// Layout
+$padding-base: 40px;
+$item-height: 80px;
+$item-base-width: 600px;
+$item-width-increment: 50px;
+$hover-translate: 10px;
+
+// Positioning
+$circle-left: 100px;
+$items-left: 250px;
+$item-positions: (10%, 25%, 40%, 55%, 70%);
+
+// ===================================
+// MIXINS
+// ===================================
+
+@mixin gradient($colors) {
+  background: linear-gradient(90deg, nth($colors, 1), nth($colors, 2));
+}
+
+@mixin circle-gradient($colors) {
+  background: linear-gradient(145deg, nth($colors, 1), nth($colors, 2));
+}
+
+@mixin item-shape() {
+  clip-path: polygon(0 0, calc(100% - 40px) 0, 100% 50%, calc(100% - 40px) 100%, 0 100%);
+}
+
+@mixin flex-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin icon-base() {
+  width: 30px;
+  height: 30px;
+  margin-right: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@mixin icon-svg($path) {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='#{$path}'/%3E%3C/svg%3E");
+}
+
+// ===================================
+// BASE STYLES
+// ===================================
+
+.agenda-slide {
+  margin: 0;
+  padding: $padding-base;
+  font-family: $font-family;
+  background: linear-gradient(135deg, $light-gray 0%, $medium-gray 100%);
+  min-height: 100vh;
+  box-sizing: border-box;
+
+  .slide-container {
+    width: 100%;
+    height: calc(100vh - #{$padding-base * 2});
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide-title {
+    font-size: $title-size;
+    font-weight: bold;
+    color: $primary-dark;
+    margin-bottom: $padding-base;
+    text-align: left;
+  }
+}
+
+// ===================================
+// AGENDA CONTAINER
+// ===================================
+
+.agenda-container {
+  position: relative;
+  width: 100%;
+  height: 80%;
+  @include flex-center();
+}
+
+// ===================================
+// CENTRAL CIRCLE
+// ===================================
+
+.central-circle {
+  position: absolute;
+  left: $circle-left;
+  top: 50%;
+  transform: translateY(-50%);
+  width: $circle-size;
+  height: $circle-size;
+  @include circle-gradient($circle-bg);
+  border-radius: 50%;
+  @include flex-center();
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+
+  .central-text {
+    font-size: $central-text-size;
+    font-weight: bold;
+    color: $primary-dark;
+    margin-bottom: 8px;
+  }
+
+  .central-subtext {
+    font-size: $subtext-size;
+    color: $secondary-gray;
+    text-align: center;
+    padding: 0 20px;
+    line-height: 1.3;
+  }
+}
+
+// ===================================
+// AGENDA ITEMS
+// ===================================
+
+.agenda-item {
+  position: absolute;
+  height: $item-height;
+  @include flex-center();
+  @include item-shape();
+  transition: transform 0.3s ease;
+  left: $items-left;
+
+  &:hover {
+    transform: translateX($hover-translate);
+  }
+
+  // Generate item-specific styles
+  @for $i from 1 through 5 {
+    &.agenda-item-#{$i} {
+      @include gradient(map-get($agenda-colors, $i));
+      top: nth($item-positions, $i);
+      
+      // Dynamic width calculation
+      $width-adjustment: ($i - 3) * $item-width-increment;
+      width: $item-base-width + $width-adjustment;
+    }
+  }
+
+  .item-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0 30px;
+    color: white;
+  }
+
+  .item-text {
+    flex: 1;
+    font-size: $item-text-size;
+    line-height: 1.4;
+  }
+
+  .item-number {
+    font-size: $number-size;
+    font-weight: bold;
+    opacity: 0.3;
+    margin-left: auto;
+    margin-right: 20px;
+  }
+}
+
+// ===================================
+// ICONS
+// ===================================
+
+.item-icon {
+  @include icon-base();
+}
+
+.icon-presentation {
+  @include icon-svg('M21 3H3c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h6l-2 3v1h8v-1l-2-3h6c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 13H3V5h18v11z');
+}
+
+.icon-key {
+  @include icon-svg('M12.65 10A5.99 5.99 0 0 0 7 4a6 6 0 0 0-6 6 6 6 0 0 0 6 6 5.99 5.99 0 0 0 5.65-4H17v4h4v-4h2v-2H12.65zM7 14a4 4 0 0 1-4-4 4 4 0 0 1 4-4 4 4 0 0 1 4 4 4 4 0 0 1-4 4z M7 10m-1 0a1 1 0 1 0 2 0a1 1 0 1 0-2 0');
+}
+
+.icon-diamond {
+  @include icon-svg('M6 2l-4 6 10 14L22 8l-4-6H6zm2.5 7L10 6h4l1.5 3H8.5zm1.5 5.3L7 9h3l-0.5 5.3zm2 0L11 9h3l-1 5.3zm4.5-5.3L15 6h1l2 3h-2z');
+}
+
+.icon-layers {
+  @include icon-svg('M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5');
+}
+
+.icon-settings {
+  @include icon-svg('M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69z');
+}
+
+// ===================================
+// RESPONSIVE DESIGN
+// ===================================
+
+@media (max-width: 1200px) {
+  .agenda-item {
+    left: $items-left - 50px;
+    
+    @for $i from 1 through 5 {
+      &.agenda-item-#{$i} {
+        width: ($item-base-width - 100px) + (($i - 3) * ($item-width-increment - 10px));
+      }
+    }
+  }
+
+  .central-circle {
+    left: $circle-left - 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .agenda-slide {
+    padding: 20px;
+    
+    .slide-title {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+  }
+
+  .agenda-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .central-circle {
+    position: static;
+    transform: none;
+    margin-bottom: 30px;
+    width: 150px;
+    height: 150px;
+    
+    .central-text {
+      font-size: 1.5rem;
+    }
+  }
+
+  .agenda-item {
+    position: static;
+    width: 100% !important;
+    margin-bottom: 15px;
+    left: auto;
+    
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+}
+
+// ===================================
+// UTILITY CLASSES
+// ===================================
+
+.agenda-slide {
+  // Theme variations
+  &.dark-theme {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    
+    .slide-title {
+      color: white;
+    }
+    
+    .central-circle {
+      @include circle-gradient((#34495e, #3d4e6a));
+      
+      .central-text {
+        color: white;
+      }
+      
+      .central-subtext {
+        color: #bdc3c7;
+      }
+    }
+  }
+
+  // Size variations
+  &.compact {
+    .agenda-item {
+      height: $item-height - 20px;
+    }
+    
+    .central-circle {
+      width: $circle-size - 50px;
+      height: $circle-size - 50px;
+    }
+  }
+
+  &.large {
+    .agenda-item {
+      height: $item-height + 20px;
+    }
+    
+    .central-circle {
+      width: $circle-size + 50px;
+      height: $circle-size + 50px;
+    }
+  }
+}

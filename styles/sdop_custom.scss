@@ -1,5 +1,6 @@
 /*-- scss:uses --*/
 @use "./_styles.scss" as s;
+@use "./_agenda-slide.scss" as a;
 
 /*-- scss:defaults --*/
 
@@ -33,11 +34,11 @@ $presentation-heading-font: "Montserrat";
   }
 }
 
-.reveal h1, h2 {
+.reveal h1 {
   font: "Montserrat";
   left: "55%" ;
   top: "55%"; 
-  color: s.get-color("yellow");
+  color: s.get-color("deep-blue");
   padding: 0.3em .5em; 
   background-color: rgba(255, 255, 255, .5); 
   backdrop-filter: blur(5px); 
@@ -67,9 +68,10 @@ $presentation-heading-font: "Montserrat";
   font-weight: 800;
 }
 
-.reveal h3 {
+#key-point h3{
   font-display: strong;
   color: s.get-color("red");
   vertical-align: middle;
   position: absolute;
+  font-size: 4rem;
 }

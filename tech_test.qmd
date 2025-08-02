@@ -12,7 +12,7 @@ format:
     chalkboard: true
     theme: 
       - simple
-      - sdop_custom.scss
+      - styles/sdop_custom.scss
     slide-number: true
 ---
 
@@ -25,6 +25,22 @@ format:
 
 ::: {.column width="50%"}
 ![Deputy Chief Probation Officer Martin Gleason](imgs/marty_pic.jpeg){width="83%"}
+:::
+:::::
+
+## Today's Agenda
+
+::::: columns
+::: {.column width="40%"}
+-   What is SDOP
+-   How Cook County Is Using It
+-   Hands on with SDOP
+-   Benefits to Department
+-   Questions and Answers
+:::
+
+::: {.column width="60%"}
+![]()
 :::
 :::::
 
@@ -53,7 +69,11 @@ format:
 
 ![](imgs/sdop_venn.png)
 
+##  {#key-point}
+
+::: center
 ### Probation and Court Services are Not Health Care Professionals
+:::
 
 ## Cook County Municipalities
 
