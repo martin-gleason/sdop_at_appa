@@ -1,4 +1,9 @@
-$font-weights: ("light": 200, "regular": 400, "medium": 600, "bold": 800);
+$font-weights: (
+  "light": 200,
+  "regular": 400,
+  "medium": 600,
+  "bold": 800
+);
 
 $colors: (
   "black": #061826,
@@ -12,8 +17,8 @@ $colors: (
 );
 
 @function weight($weight-name) {
-    @return map-get($font-weights, $weight-name)
-} 
+  @return map-get($font-weights, $weight-name)
+}
 
 @function get-color($color) {
   @return map-get($colors, $color)
