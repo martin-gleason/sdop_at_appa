@@ -29,7 +29,7 @@ format:
 :::
 
 ::: {.column width="50%"}
-![Deputy Chief Probation Officer Martin Gleason](imgs/marty_pic.jpeg){width="83%"}
+![Deputy Chief Probation Officer Martin Gleason](imgs/marty_headshot.jpeg)
 :::
 :::::
 
@@ -38,7 +38,7 @@ format:
 :::::: columns
 :::: {.column width="70%"}
 ::: {.incremental .highlight-last}
--   What is SDOP
+-   A quick history of the Social Determinants of Probation (SDOP)
 
 -   How Cook County Is Using It
 
@@ -49,14 +49,14 @@ format:
 ::::
 
 ::: {.column width="30%"}
-![](imgs/venn_diagram.png)
+![](imgs/cookcountyseal.svg.png)
 :::
 ::::::
 
-------------------------------------------------------------------------
+## Slido Poll: Social Determinants of Health
 
 ```{=html}
-<iframe src="https://wall.sli.do/event/vLVXUZvfFfM6vdhJsdQRmS" height="100%" width="100%" frameBorder="0" style="min-height: 560px;" allow="clipboard-write" title="Slido"></iframe>
+<iframe src='https://wall.sli.do/event/vLVXUZvfFfM6vdhJsdQRmS/embed/polls/f5b53eed-2cba-4280-9e02-62a5ac7a3eed' height="100%" width="100%" frameBorder="0" style="min-height: 560px;" allow="clipboard-write" title="Slido"></iframe>
 ```
 
 ## A Brief History of the Social Determinants Of Probation
@@ -64,13 +64,13 @@ format:
 ::::::: columns
 :::: {.column width="45%"}
 ::: {.incremental .highlight-last}
--  [Social determinants of health (SDOH) are the nonmedical factors that influence health outcomes.](https://www.cdc.gov/about/priorities/why-is-addressing-sdoh-important.html#:~:text=A%20SDOH%2C%20including%20the%20effects,education%2C%20wealth%2C%20and%20employment.)
+-   [Social determinants of health (SDOH) are the nonmedical factors that influence health outcomes.](https://www.cdc.gov/about/priorities/why-is-addressing-sdoh-important.html#:~:text=A%20SDOH%2C%20including%20the%20effects,education%2C%20wealth%2C%20and%20employment.)
 
 -   Cook County Juvenile Court explored collecting this data in 2022
 
-  -   Don't we collect this information in our screenings and assessments already?
+    -   *Don't we collect this information in our screenings and assessments already?*
 
--   We already collect a lot of this data
+-   **Most agencies already collect a lot of this data**
 
 -   What matters is how we use it
 :::
@@ -84,22 +84,88 @@ format:
 :::
 :::::::
 
-## Acturial Risk vs Social Determiants
--  
+## 
 
-------------------------------------------------------------------------
-
-![](imgs/sdop_venn.png)
-
-##  {.key-point}
-
-::: center
+::: key-point
 ### Probation and Court Services are Not Health Care Professionals
 :::
+
+## Actuarial Risk Tools
+
+::: {.incremental .highlight-last}
+-   Evidence based
+-   Valid and reliable
+-   Validated and normed on populations
+-   Provides a level of predictive validity for reoffending
+-   Provides a basis for case planning
+:::
+
+## Social Determinants of Probation {.key-point}
+
+### Is a framework to equitably address ways to plan for success, not mitigating failure
+
+## Core Principals of Social Determinants of Probation
+
+1.  Court conditions **alone** do not change behavior
+2.  Engaging with youth and families requires a multidisciplanry approach
+3.  Case plans should be a plan to success
+4.  Everyone has a role to play in planning for our youth's success
+5.  Behavior change is complex and requires patience and resources
+6.  We have to be smart with our data and our resources
+
+## Examples of SDOP in Action
+
+**Based on real life examples**
+
+::::: columns
+::: {.column width="50%"}
+##### Instructions
+
+1.  Introduce yourself to your neighbors
+2.  Pick a Scenario
+3.  Discuss what SDOP factors are being addressed in this brief scenario
+4.  Discuss how you can case plan around this issue
+5.  Share back on Slido!
+:::
+
+::: {.column width="50%"}
+![By Marie-Lan Nguyen (User:Jastrow) - Own work, CC BY 3.0, https://commons.wikimedia.org/w/index.php?curid=3651466](imgs/lady_justice.jpg){width="55%" fig-align="center"}
+:::
+:::::
+
+## Scenarios
+
+::::: columns
+::: {.column width="75%"}
+1.  You are a probation officer in a major metroplitan area. A young person on your caseload lives on the far north side of the city. The only agency that will work with him is on the opposite end of the city, and is not on any direct transit line. Neither he nor his family members have access to car.
+
+2.  
+:::
+
+::: {.column width="25%"}
+![Slido QR Code](imgs/scenarios.png)
+:::
+:::::
+
+## Slido Shareback!
+
+```{=html}
+<iframe src='https://app.sli.do/event/vLVXUZvfFfM6vdhJsdQRmS/embed/polls/26d0fddf-6083-46a4-9f70-62801389fd06' height="100%" width="100%" frameBorder="0" style="min-height: 560px;" allow="clipboard-write" title="Slido"></iframe>
+```
+
+## SDOP Venn Diagram
+
+![](imgs/sdop_venn.png)
 
 ## Cook County Municipalities
 
 ```{r}
+#| label: muni
+#| echo: false
+#| fig-width: 16
+#| fig-height: 10
+#| out-width: "100%"
+#| out-height: "80vh"
 library(leaflet)
 library(sf)
 library(here)
@@ -118,6 +184,49 @@ leaflet() %>%
     label = muni$MUNICIPALITY
   ) %>%
   setView(lat = 41.85003, lng = -87.65005, zoom = 10)
+
+```
+
+## Chicago Police Districts
+
+```{r}
+#| label: chicago
+#| echo: false
+#| fig-width: 16
+#| fig-height: 10
+#| out-width: "100%"
+#| out-height: "80vh"
+
+library(leaflet)
+library(sf)
+library(here)
+library(dplyr)
+
+chicago <- read_sf(here("shapefiles", "cpd_2024.geojson")) |>
+  st_transform(crs = 4326) |>
+  mutate(dist_num = as.integer(dist_num)) |>
+  arrange(dist_num)
+
+cpd_pal <- colorFactor(palette = "viridis", domain = chicago$dist_num)
+
+leaflet() |>
+  addTiles() |>
+  addPolygons(
+    data = chicago,
+    color = "black",
+    weight = 2,
+    opacity = 0.4,
+    fillOpacity = .5,
+    fillColor = ~ cpd_pal(chicago$dist_num),
+    label = chicago$dist_label
+  ) |>
+  addLegend(
+    position = "bottomleft",
+    pal = cpd_pal,
+    values = chicago$dist_num,
+    title = "Chicago Police Department District Boundaries"
+  ) |>
+  setView(lat = 41.85003, lng = -87.65005, zoom = 11)
 
 ```
 

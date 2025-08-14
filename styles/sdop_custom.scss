@@ -8,8 +8,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 
-$body-color: s.get-color(black);
-$headings-color: s.get-color(red);
+$body-color: s.get-color("black");
+$headings-color: s.get-color("red");
 $light-blue: s.get-color("light-blue");
 $deep-blue: s.get-color("deep-blue");
 
@@ -19,6 +19,10 @@ $presentation-heading-font: "Montserrat";
 
 
 /*-- scss:rules --*/
+.reveal .slide {
+  background-color: s.get-color("sage");
+
+}
 
 .reveal .slide blockquote {
   border-left: 3px solid $text-muted;
@@ -37,7 +41,7 @@ $presentation-heading-font: "Montserrat";
   text-align: center;
 
   figcaption {
-    color: get-colors(deep-blue);
+    color: s.get-color("deep-blue");
     font-style: italic;
   }
 }
@@ -55,8 +59,8 @@ $presentation-heading-font: "Montserrat";
 }
 
 .reveal .slide ul li {
-  font-size: 1.85rem;
-  margin-bottom: 15px;
+  font-size: 1.95rem;
+  margin-bottom: 20px;
 }
 
 .reveal .slides section.quarto-title-block {
@@ -77,17 +81,61 @@ $presentation-heading-font: "Montserrat";
   font-weight: 800;
 }
 
-.key-point h3 {
-  font-display: strong;
-  color: s.get-color("red");
-  vertical-align: middle;
-  position: absolute;
-  font-size: 5rem;
-  font-style: italic;
+.key-point {
+
+  // Remove default slide margins and padding
+  .reveal & {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100vh !important;
+    width: 100vw !important;
+
+    // Create flexbox container for vertical centering
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+
+    // Remove background to avoid conflicts
+    background: transparent !important;
+  }
+
+  // Target h3 elements specifically
+  h3 {
+    color: s.get-color("red") !important;
+    font-weight: weight("bold") !important;
+    font-size: clamp(2.5rem, 6vw, 5rem) !important; // Responsive sizing
+    line-height: 1.2 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin: 0 !important;
+    padding: 2rem !important;
+
+    // Ensure text doesn't overflow
+    max-width: 95vw;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  // Hide slide number and navigation for full impact
+  .reveal & {
+    .slide-number {
+      display: none !important;
+    }
+
+    .controls {
+      opacity: 0.1 !important;
+      transition: opacity 0.3s ease;
+
+      &:hover {
+        opacity: 1 !important;
+      }
+    }
+  }
 }
 
 .highlight-last {
-  color: lightgrey;
+  color: s.get-color("light-blue");
 
   .current-fragment {
     color: $deep-blue;
@@ -114,5 +162,70 @@ $presentation-heading-font: "Montserrat";
   .slido-container {
     height: 50vh;
     min-height: 300px;
+  }
+}
+
+.map {
+
+  // Make the slide take full available space
+  .reveal & {
+    height: 100vh !important;
+    width: 100vw !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  // Target the Leaflet map specifically
+  .leaflet-container {
+    height: 85vh !important; // Leave some space for the title
+    width: 95vw !important;
+    margin: 0 auto !important;
+  }
+
+  // Adjust the R code chunk output
+  .cell-output-display {
+    height: 85vh !important;
+    width: 95vw !important;
+    margin: 0 auto !important;
+  }
+
+  // Make the slide title smaller and positioned
+  h2 {
+    font-size: 2rem !important;
+    margin: 10px 0 !important;
+    text-align: center;
+  }
+}
+
+.key-point {
+  &.red h3 {
+    color: s.get-color("red") !important;
+  }
+
+  &.yellow h3 {
+    color: s.get-color("yellow") !important;
+  }
+
+  &.green h3 {
+    color: s.get-color("green") !important;
+  }
+
+  &.teal h3 {
+    color: s.get-color("teal") !important;
+  }
+
+  &.deep-blue h3 {
+    color: s.get-color("deep-blue") !important;
+  }
+}
+
+// Size variants
+.key-point {
+  &.large h3 {
+    font-size: clamp(3.5rem, 8vw, 7rem) !important;
+  }
+
+  &.small h3 {
+    font-size: clamp(1.5rem, 4vw, 3rem) !important;
   }
 }
