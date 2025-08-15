@@ -1,40 +1,60 @@
 /*-- scss:uses --*/
 @use "./_styles.scss" as s;
-@use "./_agenda-slide.scss" as a;
 
 /*-- scss:defaults --*/
-
-// fonts
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
 
 $body-color: s.get-color("black");
 $headings-color: s.get-color("red");
-$light-blue: s.get-color("light-blue");
-$deep-blue: s.get-color("deep-blue");
-
-
-// headings
 $presentation-heading-font: "Montserrat";
 
-
 /*-- scss:rules --*/
+img {
+  border-radius: 25px;
+}
+
 .reveal .slide {
   background-color: s.get-color("sage");
+  font-family: "Montserrat", sans-serif;
 
+  blockquote {
+    border-left: 3px solid s.get-color("grey");
+    padding-left: 0.5em;
+  }
+
+  figure>figcaption,
+  img.r-stretch+p.caption {
+    font-size: .7rem;
+  }
+
+  ul li {
+    font-size: 1.95rem;
+    margin-bottom: 20px;
+  }
+
+  ol li {
+    font-size: 1.65rem !important;
+    margin-bottom: 55px !important;
+  }
 }
 
-.reveal .slide blockquote {
-  border-left: 3px solid $text-muted;
-  padding-left: 0.5em;
+.reveal h1,
+.reveal .slides section.quarto-title-block {
+  font-family: "Montserrat";
+  color: s.get-color("red");
+  padding: 0.3em .5em;
+  background-color: rgba(255, 255, 255, .5);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5);
+  border-radius: 3px;
 }
 
-.reveal .slide figure>figcaption {
-  font-size: .7rem;
-}
-
-.reveal .slide img.r-stretch+p.caption {
-  font-size: .7rem;
+.reveal .slides section.quarto-title-block {
+  position: absolute;
+  font-size: 1.4rem;
+  padding: 0.5em 1em;
+  border-radius: 5px;
 }
 
 .head_shot {
@@ -47,41 +67,6 @@ $presentation-heading-font: "Montserrat";
   }
 }
 
-.reveal h1 {
-  font: "Montserrat";
-  left: "55%";
-  top: "55%";
-  color: s.get-color("red");
-  padding: 0.3em .5em;
-  background-color: rgba(255, 255, 255, .5);
-  backdrop-filter: blur(5px);
-  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5);
-  border-radius: 3px;
-}
-
-.reveal .slide ul li {
-  font-size: 1.95rem;
-  margin-bottom: 20px;
-}
-
-.reveal .slides section .slide ol li,
-.reveal .slides section ol li {
-  font-size: 1.65rem !important;
-  margin-bottom: 55px !important;
-}
-
-.reveal .slides section.quarto-title-block {
-  position: absolute;
-  left: "55%";
-  top: "55%";
-  font-size: 1.4rem;
-  padding: 0.5em 1em;
-  background-color: rgba(255, 255, 255, .5);
-  backdrop-filter: blur(5px);
-  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5);
-  border-radius: 5px;
-}
-
 .subtitle {
   font-style: italic;
   font-size: 1.1rem;
@@ -89,43 +74,18 @@ $presentation-heading-font: "Montserrat";
 }
 
 .key-point {
-
-  // Remove default slide margins and padding
   .reveal & {
     margin: 0 !important;
     padding: 0 !important;
     height: 100vh !important;
     width: 90vw !important;
-
-    // Create flexbox container for vertical centering
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
     text-align: center !important;
-
-    // Remove background to avoid conflicts
     background: transparent !important;
-  }
 
-  // Target h3 elements specifically
-  h3 {
-    color: s.get-color("red") !important;
-    font-weight: weight("bold") !important;
-    font-size: clamp(2.5rem, 6vw, 5rem) !important; // Responsive sizing
-    line-height: 1.2 !important;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    margin: 0 !important;
-    padding: 2rem !important;
-
-    // Ensure text doesn't overflow
-    max-width: 95vw;
-    word-wrap: break-word;
-    hyphens: auto;
-  }
-
-  // Hide slide number and navigation for full impact
-  .reveal & {
     .slide-number {
       display: none !important;
     }
@@ -139,72 +99,21 @@ $presentation-heading-font: "Montserrat";
       }
     }
   }
-}
 
-.highlight-last {
-  color: s.get-color("light-blue");
-
-  .current-fragment {
-    color: $deep-blue;
-  }
-}
-
-.slido-container {
-  width: 100%;
-  height: 60vh;
-  min-height: 400px;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.slido-container iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .slido-container {
-    height: 50vh;
-    min-height: 300px;
-  }
-}
-
-.map {
-
-  // Make the slide take full available space
-  .reveal & {
-    height: 100vh !important;
-    width: 100vw !important;
-    padding: 0 !important;
+  h3 {
+    color: s.get-color("red") !important;
+    font-weight: s.weight("bold") !important;
+    font-size: clamp(2.5rem, 6vw, 5rem) !important;
+    line-height: 1.2 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     margin: 0 !important;
+    padding: 2rem !important;
+    max-width: 95vw;
+    word-wrap: break-word;
+    hyphens: auto;
   }
 
-  // Target the Leaflet map specifically
-  .leaflet-container {
-    height: 85vh !important; // Leave some space for the title
-    width: 95vw !important;
-    margin: 0 auto !important;
-  }
-
-  // Adjust the R code chunk output
-  .cell-output-display {
-    height: 85vh !important;
-    width: 95vw !important;
-    margin: 0 auto !important;
-  }
-
-  // Make the slide title smaller and positioned
-  h2 {
-    font-size: 2rem !important;
-    margin: 10px 0 !important;
-    text-align: center;
-  }
-}
-
-.key-point {
+  // Color variants
   &.red h3 {
     color: s.get-color("red") !important;
   }
@@ -224,10 +133,8 @@ $presentation-heading-font: "Montserrat";
   &.deep-blue h3 {
     color: s.get-color("deep-blue") !important;
   }
-}
 
-// Size variants
-.key-point {
+  // Size variants
   &.large h3 {
     font-size: clamp(3.5rem, 8vw, 7rem) !important;
   }
@@ -237,24 +144,71 @@ $presentation-heading-font: "Montserrat";
   }
 }
 
+.highlight-last {
+  color: s.get-color("light-blue");
+
+  .current-fragment {
+    color: s.get-color("deep-blue");
+  }
+}
+
+.slido-container {
+  width: 100%;
+  height: 60vh;
+  min-height: 400px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+}
+
+.map {
+  .reveal & {
+    height: 100vh !important;
+    width: 100vw !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .leaflet-container,
+  .cell-output-display {
+    height: 85vh !important;
+    width: 95vw !important;
+    margin: 0 auto !important;
+  }
+
+  h2 {
+    font-size: 2rem !important;
+    margin: 10px 0 !important;
+    text-align: center;
+  }
+}
+
 .default-override {
   .reveal & {
     font-family: "Montserrat" !important;
     color: s.get-color("black") !important;
-    background: s.get-color("sage") !important; // Force sage background
+    background: s.get-color("sage") !important;
   }
 
-  // Override all headings
   h1,
   h2,
   h3,
   h4,
   h5,
-  h6 {
+  h6,
+  strong,
+  b,
+  ul li,
+  ol li {
     color: s.get-color("black") !important;
   }
 
-  // Override section headers
   .section-header {
     padding: 1.5rem;
     border-radius: 15px;
@@ -273,35 +227,19 @@ $presentation-heading-font: "Montserrat";
     }
   }
 
-  // Override implementation content
-  .implementation-content {
-    .guideline-card {
-      background: white !important;
-      padding: 1rem;
-      margin: 0.5rem 0;
-      border-radius: 8px;
-      border-left: 4px solid s.get-color("black") !important; // Black border
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  .implementation-content .guideline-card {
+    background: white !important;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    border-left: 4px solid s.get-color("black") !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-      strong {
-        color: s.get-color("black") !important; // Black text instead of deep-blue
-      }
+    strong {
+      color: s.get-color("black") !important;
     }
   }
 
-  // Override all strong/bold text
-  strong,
-  b {
-    color: s.get-color("black") !important;
-  }
-
-  // Override list items
-  ul li,
-  ol li {
-    color: s.get-color("black") !important;
-  }
-
-  // Override any background gradients
   &.implementation-slide .reveal & {
     background: s.get-color("sage") !important;
   }
@@ -322,13 +260,20 @@ $presentation-heading-font: "Montserrat";
       position: relative !important;
 
       &::before {
-        font-family: 'Font Awesome 6 Free' !important; // Updated to version 6
-        content: "\f004" !important; // Heart icon
+        font-family: 'Font Awesome 6 Free' !important;
+        content: "\f004" !important;
         font-weight: 900 !important;
         margin-right: 15px !important;
-        color: s.get-color("red") !important; // Use your red color
+        color: s.get-color("red") !important;
         font-size: 1.5rem !important;
       }
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .slido-container {
+    height: 50vh;
+    min-height: 300px;
   }
 }

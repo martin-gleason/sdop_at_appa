@@ -91,4 +91,4 @@ closures <- closures |>
 
 closures |>
   ggplot(aes(x = risk_level)) +
-  geom_bar(stat = "count")
+  geom_bar(aes(fill = as.factor(zip_code), stat = 'count'))
