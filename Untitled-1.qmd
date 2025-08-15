@@ -1,0 +1,333 @@
+---
+title: "Untitled"
+format: html
+---
+
+# Economic Stability {.economic-section}
+
+## <i class="fas fa-dollar-sign"></i> Economic Stability {.section-header .economic}
+
+::: {.assessment-questions}
+### Key Assessment Areas
+
+::: {.question-card}
+**Employment Status**
+- How many adults in your home are employed?
+- *Scoring: 2+ adults (2 pts), 1 adult (1 pt), None (0 pts)*
+:::
+
+::: {.question-card}
+**Income Stability** 
+- Has anyone in your home lost a job or source of income?
+- *Scoring: No (2 pts), Yes (0 pts)*
+:::
+
+::: {.score-info}
+**Section Maximum: 4 points**
+:::
+:::
+
+::: {.clinical-note}
+<i class="fas fa-info-circle"></i> **Clinical Significance:** Employment stability strongly predicts probation success rates and reduces recidivism risk.
+:::
+
+---
+
+# Neighborhood & Built Environment {.neighborhood-section}
+
+## <i class="fas fa-home"></i> Neighborhood & Built Environment {.section-header .neighborhood}
+
+::: {.assessment-questions}
+### Housing & Environmental Factors
+
+::: {.question-card}
+**Housing Stability**
+- Current housing situation assessment
+- *Stable (2 pts), Temporary (1 pt), Unstable/None (0 pts)*
+:::
+
+::: {.question-card}
+**Housing Security**
+- Concerns about future housing stability
+- *No concerns (2 pts), Maybe concerned (1 pt), Very concerned (0 pts)*
+:::
+
+::: {.question-card}
+**Living Conditions**
+- Environmental hazards checklist
+- *No problems (2 pts), Multiple issues reduce score*
+:::
+
+::: {.question-card}
+**Transportation Access**
+- Impact on appointments and obligations
+- *No barriers (2 pts), Significant barriers (0 pts)*
+:::
+
+::: {.score-info}
+**Section Maximum: 8 points**
+:::
+:::
+
+---
+
+# Education {.education-section}
+
+## <i class="fas fa-graduation-cap"></i> Education {.section-header .education}
+
+::: {.assessment-questions}
+### Educational Engagement & Resources
+
+::: {.question-card}
+**School Enrollment**
+- Current educational participation
+- *Currently enrolled (2 pts), Not enrolled (0 pts)*
+:::
+
+::: {.question-card}
+**School Safety**
+- Perception of safety in educational environment
+- *Always safe (2 pts), Sometimes (1 pt), Never safe (0 pts)*
+:::
+
+::: {.question-card}
+**Digital Access**
+- Reliable internet for educational needs
+- *Reliable access (2 pts), Sometimes (1 pt), No access (0 pts)*
+:::
+
+::: {.question-card}
+**Enrichment Opportunities**
+- Access to after-school programs and activities
+- *Good access (2 pts), Some access (1 pt), No access (0 pts)*
+:::
+
+::: {.score-info}
+**Section Maximum: 8 points**
+:::
+:::
+
+---
+
+# Community & Social Context {.community-section}
+
+## <i class="fas fa-users"></i> Community & Social Context {.section-header .community}
+
+::: {.assessment-questions}
+### Social Support & Community Connection
+
+::: {.question-card}
+**Social Connections**
+- Frequency of meaningful social contact
+- *Often (2 pts), Sometimes (1 pt), Rarely/Never (0 pts)*
+:::
+
+::: {.question-card}
+**Support Network**
+- Availability of help from family/friends
+- *Strong support (2 pts), Some support (1 pt), No support (0 pts)*
+:::
+
+::: {.question-card}
+**Community Acceptance**
+- Feeling valued and accepted in community
+- *Accepted (2 pts), Sometimes (1 pt), Not accepted (0 pts)*
+:::
+
+::: {.question-card}
+**Youth Opportunities**
+- Safe recreational spaces for young people
+- *Many options (2 pts), Some options (1 pt), No options (0 pts)*
+:::
+
+::: {.question-card}
+**Social Inclusion**
+- Frequency of feeling excluded from groups
+- *Never excluded (2 pts), Sometimes (1 pt), Often excluded (0 pts)*
+:::
+
+::: {.score-info}
+**Section Maximum: 10 points**
+:::
+:::
+
+---
+
+# Health Care {.healthcare-section}
+
+## <i class="fas fa-stethoscope"></i> Health Care {.section-header .healthcare}
+
+::: {.assessment-questions}
+### Healthcare Access & Quality
+
+::: {.question-card}
+**Primary Care Access**
+- Family access to primary healthcare
+- *Good access (2 pts), No access (0 pts)*
+:::
+
+::: {.question-card}
+**Emergency Services**
+- Hospital within 2-mile radius
+- *Hospital nearby (2 pts), No nearby hospital (0 pts)*
+:::
+
+::: {.question-card}
+**Mental Health Support**
+- Difficulties finding mental health resources
+- *No difficulties (2 pts), Some difficulties (1 pt), Major difficulties (0 pts)*
+:::
+
+::: {.score-info}
+**Section Maximum: 6 points**
+:::
+:::
+
+::: {.clinical-note}
+<i class="fas fa-info-circle"></i> **Clinical Note:** Healthcare access significantly impacts ability to address underlying issues affecting behavior.
+:::
+
+---
+
+# Food Security {.food-section}
+
+## <i class="fas fa-utensils"></i> Food Security {.section-header .food}
+
+::: {.assessment-questions}
+### Nutritional Stability & Access
+
+::: {.question-card}
+**Food Worry - Short Term**
+- Concern about food running out (past 2 months)
+- *Never worried (2 pts), Sometimes (1 pt), Often worried (0 pts)*
+:::
+
+::: {.question-card}
+**Food Insufficiency - Long Term**
+- Food lasting until next purchase (past 12 months)
+- *Always sufficient (2 pts), Sometimes insufficient (1 pt), Often insufficient (0 pts)*
+:::
+
+::: {.score-info}
+**Section Maximum: 4 points**
+:::
+:::
+
+::: {.clinical-note}
+<i class="fas fa-info-circle"></i> **Research Finding:** Food insecurity correlates with increased stress and behavioral challenges affecting probation compliance.
+:::
+
+---
+
+# Public Safety {.safety-section}
+
+## <i class="fas fa-shield-alt"></i> Public Safety {.section-header .public-safety}
+
+::: {.assessment-questions}
+### Personal Safety & Community Violence
+
+::: {.columns}
+::: {.column width="50%"}
+
+::: {.question-card}
+**Personal Safety Indicators**
+- Physical harm frequency
+- Verbal abuse frequency  
+- Threat frequency
+- Emotional abuse frequency
+:::
+
+::: {.question-card}
+**Community Violence**
+- Loss to gun violence
+- Neighborhood gun violence exposure
+:::
+
+:::
+::: {.column width="50%"}
+
+::: {.question-card}
+**Protective Factors**
+- Positive community activities
+- *Many activities (2 pts), Some (1 pt), None (0 pts)*
+:::
+
+::: {.safety-scoring}
+**Safety Scoring:**
+- Never/No exposure: 2 points
+- Rarely: 1 point  
+- Sometimes: 1 point
+- Often/Yes: 0 points
+:::
+
+:::
+:::
+
+::: {.score-info}
+**Section Maximum: 14 points**
+:::
+:::
+
+---
+
+# Assessment Summary {.summary-slide}
+
+## <i class="fas fa-chart-bar"></i> Scoring Interpretation
+
+::: {.scoring-guide}
+### Risk Level Categories
+
+::: {.risk-level .low-risk}
+**80-100%** - **Low Risk**  
+Strong protective factors, minimal intervention needs
+:::
+
+::: {.risk-level .moderate-risk}
+**60-79%** - **Moderate Risk**  
+Some support needs, targeted interventions recommended
+:::
+
+::: {.risk-level .high-risk}
+**40-59%** - **High Risk**  
+Significant needs, comprehensive intervention required
+:::
+
+::: {.risk-level .very-high-risk}
+**Below 40%** - **Very High Risk**  
+Extensive intervention needs, immediate comprehensive support
+:::
+:::
+
+::: {.total-possible}
+**Total Possible Score: 54 points**
+:::
+
+---
+
+# Implementation Notes {.implementation-slide}
+
+## <i class="fas fa-clipboard-check"></i> Clinical Implementation
+
+::: {.implementation-content}
+### Assessment Guidelines
+
+::: {.guideline-card}
+**Reading Level:** Questions written at 2nd-6th grade level for accessibility
+:::
+
+::: {.guideline-card}
+**Scoring Method:** 0-2 point scale with equal weighting for reliability testing
+:::
+
+::: {.guideline-card}
+**Legal Compliance:** Supports Illinois Juvenile Court Act Section 5-750 requirements
+:::
+
+::: {.guideline-card}
+**Trauma-Informed:** Uses non-judgmental language and voluntary participation
+:::
+
+::: {.guideline-card}
+**Cultural Competency:** Includes "choose not to answer" options for sensitive questions
+:::
+:::

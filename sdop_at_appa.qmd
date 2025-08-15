@@ -19,6 +19,7 @@ format:
     theme: 
       - simple
       - styles/sdop_custom.scss
+      - styles/assessment_styles.scss
 ---
 
 ## Who are we {.head_shot}
@@ -40,9 +41,11 @@ format:
 ::: {.incremental .highlight-last}
 -   A quick history of the Social Determinants of Probation (SDOP)
 
--   How Cook County Is Using It
-
 -   Hands on with SDOP
+
+-   How Cook County Is Currently Using SDOP
+
+-   Next Steps with SDOP
 
 -   Questions and Answers
 :::
@@ -56,7 +59,7 @@ format:
 ## Slido Poll: Social Determinants of Health
 
 ```{=html}
-<iframe src='https://wall.sli.do/event/vLVXUZvfFfM6vdhJsdQRmS/embed/polls/f5b53eed-2cba-4280-9e02-62a5ac7a3eed' height="100%" width="100%" frameBorder="0" style="min-height: 560px;" allow="clipboard-write" title="Slido"></iframe>
+<iframe src='https://wall.sli.do/event/7GzoB4bBE1n1PfhN9Rm4vU/embed/polls/e47531fd-f77b-40d6-98a6-13a12fd47174' height="100%" width="100%" frameBorder="0" style="min-height: 560px;" allow="clipboard-write" title="Slido"></iframe>
 ```
 
 ## A Brief History of the Social Determinants Of Probation
@@ -84,6 +87,10 @@ format:
 :::
 :::::::
 
+## Categories of SDOP
+
+![](imgs/sdop_v2.PNG){fig-align="center"}
+
 ## 
 
 ::: key-point
@@ -108,18 +115,16 @@ format:
 
 1.  Court conditions **alone** do not change behavior
 2.  Engaging with youth and families requires a multidisciplanry approach
-3.  Case plans should be a plan to success
-4.  Everyone has a role to play in planning for our youth's success
+3.  Case plans should be a youth driven plan for their own success
+4.  **Everyone** in the agency has a role to play in planning for our youths' successes
 5.  Behavior change is complex and requires patience and resources
 6.  We have to be smart with our data and our resources
 
 ## Examples of SDOP in Action
 
-**Based on real life examples**
-
 ::::: columns
 ::: {.column width="50%"}
-##### Instructions
+##### *Scenario Instructions*
 
 1.  Introduce yourself to your neighbors
 2.  Pick a Scenario
@@ -137,9 +142,9 @@ format:
 
 ::::: columns
 ::: {.column width="75%"}
-1.  You are a probation officer in a major metroplitan area. A young person on your caseload lives on the far north side of the city. The only agency that will work with him is on the opposite end of the city, and is not on any direct transit line. Neither he nor his family members have access to car.
+1.  You are a probation officer in a major metropolitan area. A young person on your caseload has been court ordered to attend therapy, and he lives on the far north side of the city, where he attends school every day. The only agency that will work with him is on the opposite end of the city, and is not on any direct transit line. Neither he nor his family members have access to car. Money for the family is tight.
 
-2.  
+2.  You have a young person who has been accepted into college and lives with a family member who has a severe addiction is the primary caretaker for another family member. While the family does have assistance from SSI, the guardian's addicition makes it difficult for him to meet his basic needs and complete his necessary paperwork(social security card, birth certificate, etc\_) until he turned 18. He does not have access to a computer. The job market is exceptionaly tight in his neighborhood -- and he has safety concerns traveling on transit.
 :::
 
 ::: {.column width="25%"}
@@ -149,13 +154,23 @@ format:
 
 ## Slido Shareback!
 
+## 
+
 ```{=html}
-<iframe src='https://app.sli.do/event/vLVXUZvfFfM6vdhJsdQRmS/embed/polls/26d0fddf-6083-46a4-9f70-62801389fd06' height="100%" width="100%" frameBorder="0" style="min-height: 560px;" allow="clipboard-write" title="Slido"></iframe>
+<iframe src='https://wall.sli.do/event/52nhzgTNhRyjU6gf1Qw9GQ/embed/polls/ada49774-9cc9-42a8-b645-d14b1cf8d93a' width='100%' height='100%' style="min-height: 560px;" allow="clipboard-write" title="Slido"></iframe>
 ```
 
 ## SDOP Venn Diagram
 
 ![](imgs/sdop_venn.png)
+
+## Shareback!
+
+```{=html}
+<iframe src='https://wall.sli.do/event/kivBZj9Ut6XSUNcYYwCMv1/embed/polls/03ab845f-a8bc-4328-a24a-112a5548e1f2' height="100%" width="100%" frameBorder="0" style="min-height: 560px;" allow="clipboard-write" title="Slido"></iframe>
+```
+
+# Cook County's Implementation of SDOP {.default-override}
 
 ## Cook County Municipalities
 
@@ -230,58 +245,302 @@ leaflet() |>
 
 ```
 
-## Goals of SDOP
+## How are we using SDOP
 
--   Go beyond the crimogenic needs and identify barriers that are individual and systemic
+::::: columns
+::: {.column width="50%"}
+-   Establishing principals
+-   Drafting and perfecting our assessments
+-   Leveraging our data to guide next steps
+-   Partnering with key researchers
+:::
 
--   Leverage a cross systems, multidsicplenary approach
+::: {.column width="50%"}
+![img goes here]()
+:::
+:::::
 
--   Improve the chances of succes for our youth and families
+# Economic Stability {.economic-section}
 
-## How we're going to do that
+## <i class="fas fa-dollar-sign"></i> Economic Stability {.section-header .economic}
 
--   
+:::::: assessment-questions
+### Key Assessment Areas
 
--   Work with community partners
+::: question-card
+**Employment Status** - How many adults in your home are employed? - *Scoring: 2+ adults (2 pts), 1 adult (1 pt), None (0 pts)*
+:::
 
--   Develop case plans based on common ground goals
+::: question-card
+**Income Stability** - Has anyone in your home lost a job or source of income? - *Scoring: No (2 pts), Yes (0 pts)*
+:::
 
--   Progress, not perfection
+::: score-info
+**Section Maximum: 4 points**
+:::
+::::::
 
-## Categories of SDOP
+::: clinical-note
+<i class="fas fa-info-circle"></i> **Clinical Significance:** Employment stability strongly predicts probation success rates and reduces recidivism risk.
+:::
 
-![](imgs/sdop_v2.PNG){fig-align="center"}
+# Neighborhood & Built Environment {.neighborhood-section}
 
-## Slido #2 what barriers have you encountered
+## <i class="fas fa-home"></i> Neighborhood & Built Environment {.section-header .neighborhood}
 
--   slido and discussion
+:::::::: assessment-questions
+### Housing & Environmental Factors
 
-![test fig caption](imgs/qr_tech_test.png)
+::: question-card
+**Housing Stability** - Current housing situation assessment - *Stable (2 pts), Temporary (1 pt), Unstable/None (0 pts)*
+:::
 
-*Take a picture and go to this high tech link!*
+::: question-card
+**Housing Security** - Concerns about future housing stability - *No concerns (2 pts), Maybe concerned (1 pt), Very concerned (0 pts)*
+:::
 
-## The history of SDOP
+::: question-card
+**Living Conditions** - Environmental hazards checklist - *No problems (2 pts), Multiple issues reduce score*
+:::
 
--   Ask to use SDOH
--   Meaningful use
+::: question-card
+**Transportation Access** - Impact on appointments and obligations - *No barriers (2 pts), Significant barriers (0 pts)*
+:::
 
-## Acturial risk assessment
+::: score-info
+**Section Maximum: 8 points**
+:::
+::::::::
 
-## Audience Participation #3 test
+# Education {.education-section}
 
-## Image Test 2
+## <i class="fas fa-graduation-cap"></i> Education {.section-header .education}
 
-![](imgs/IMG_8387.jpeg)
+:::::::: assessment-questions
+### Educational Engagement & Resources
 
-## Code Test
+::: question-card
+**School Enrollment** - Current educational participation - *Currently enrolled (2 pts), Not enrolled (0 pts)*
+:::
 
-```{r}
+::: question-card
+**School Safety** - Perception of safety in educational environment - *Always safe (2 pts), Sometimes (1 pt), Never safe (0 pts)*
+:::
 
-sqrt(535)
+::: question-card
+**Digital Access** - Reliable internet for educational needs - *Reliable access (2 pts), Sometimes (1 pt), No access (0 pts)*
+:::
 
-print("Factorial 10")
-factorial(10)
+::: question-card
+**Enrichment Opportunities** - Access to after-school programs and activities - *Good access (2 pts), Some access (1 pt), No access (0 pts)*
+:::
 
-```
+::: score-info
+**Section Maximum: 8 points**
+:::
+::::::::
 
-Thanks!
+# Community & Social Context Part- Part 1 {.community-section}
+
+## <i class="fas fa-users"></i> Community & Social Context {.section-header .community}
+
+:::::: assessment-questions
+### Social Support & Community Connection
+
+::: question-card
+**Social Connections** - Frequency of meaningful social contact - *Often (2 pts), Sometimes (1 pt), Rarely/Never (0 pts)*
+:::
+
+::: question-card
+**Support Network** - Availability of help from family/friends - *Strong support (2 pts), Some support (1 pt), No support (0 pts)*
+:::
+
+::: score-info
+**Section Maximum: 4 points**
+:::
+::::::
+
+# Community & Social Context - Part 2 {.community-section}
+
+## <i class="fas fa-users"></i> Community & Social Context - Part 2 {.section-header .community}
+
+::::::: assessment-questions
+### Community Integration & Youth Opportunities
+
+::: question-card
+**Community Acceptance** - Feeling valued and accepted in community - *Accepted (2 pts), Sometimes (1 pt), Not accepted (0 pts)*
+:::
+
+::: question-card
+**Youth Opportunities** - Safe recreational spaces for young people - *Many options (2 pts), Some options (1 pt), No options (0 pts)*
+:::
+
+::: question-card
+**Social Inclusion** - Frequency of feeling excluded from groups - *Never excluded (2 pts), Sometimes (1 pt), Often excluded (0 pts)*
+:::
+
+::: score-info
+**Section Maximum: 6 points**
+:::
+:::::::
+
+# Health Care {.healthcare-section}
+
+## <i class="fas fa-stethoscope"></i> Health Care {.section-header .healthcare}
+
+::::::: assessment-questions
+### Healthcare Access & Quality
+
+::: question-card
+**Primary Care Access** - Family access to primary healthcare - *Good access (2 pts), No access (0 pts)*
+:::
+
+::: question-card
+**Emergency Services** - Hospital within 2-mile radius - *Hospital nearby (2 pts), No nearby hospital (0 pts)*
+:::
+
+::: question-card
+**Mental Health Support** - Difficulties finding mental health resources - *No difficulties (2 pts), Some difficulties (1 pt), Major difficulties (0 pts)*
+:::
+
+::: score-info
+**Section Maximum: 6 points**
+:::
+:::::::
+
+::: clinical-note
+<i class="fas fa-info-circle"></i> **Clinical Note:** Healthcare access significantly impacts ability to address underlying issues affecting behavior.
+:::
+
+# Food Security {.food-section}
+
+## <i class="fas fa-utensils"></i> Food Security {.section-header .food}
+
+:::::: assessment-questions
+### Nutritional Stability & Access
+
+::: question-card
+**Food Worry - Short Term** - Concern about food running out (past 2 months) - *Never worried (2 pts), Sometimes (1 pt), Often worried (0 pts)*
+:::
+
+::: question-card
+**Food Insufficiency - Long Term** - Food lasting until next purchase (past 12 months) - *Always sufficient (2 pts), Sometimes insufficient (1 pt), Often insufficient (0 pts)*
+:::
+
+::: score-info
+**Section Maximum: 4 points**
+:::
+::::::
+
+::: clinical-note
+<i class="fas fa-info-circle"></i> **Research Finding:** Food insecurity correlates with increased stress and behavioral challenges affecting probation compliance.
+:::
+
+# Public Safety {.safety-section}
+
+## <i class="fas fa-shield-alt"></i> Public Safety {.section-header .public-safety}
+
+::::::::::: assessment-questions
+### Personal Safety & Community Violence
+
+::::::::: columns
+::::: {.column width="50%"}
+::: question-card
+**Personal Safety Indicators** - Physical harm frequency - Verbal abuse frequency\
+- Threat frequency - Emotional abuse frequency
+:::
+
+::: question-card
+**Community Violence** - Loss to gun violence - Neighborhood gun violence exposure
+:::
+:::::
+
+::::: {.column width="50%"}
+::: question-card
+**Protective Factors** - Positive community activities - *Many activities (2 pts), Some (1 pt), None (0 pts)*
+:::
+
+::: safety-scoring
+**Safety Scoring:** - Never/No exposure: 2 points - Rarely: 1 point\
+- Sometimes: 1 point - Often/Yes: 0 points
+:::
+:::::
+:::::::::
+
+::: score-info
+**Section Maximum: 14 points**
+:::
+:::::::::::
+
+# Assessment Summary {.summary-slide}
+
+## <i class="fas fa-chart-bar"></i> Scoring Interpretation
+
+::::::: scoring-guide
+### Risk Level Categories
+
+::: {.risk-level .low-risk}
+**80-100%** - **Low Risk**\
+Strong protective factors, minimal intervention needs
+:::
+
+::: {.risk-level .moderate-risk}
+**60-79%** - **Moderate Risk**\
+Some support needs, targeted interventions recommended
+:::
+
+::: {.risk-level .high-risk}
+**40-59%** - **High Risk**\
+Significant needs, comprehensive intervention required
+:::
+
+::: {.risk-level .very-high-risk}
+**Below 40%** - **Very High Risk**\
+Extensive intervention needs, immediate comprehensive support
+:::
+:::::::
+
+::: total-possible
+**Total Possible Score: 54 points**
+:::
+
+# Next Steps {.default-override}
+
+## Care and Assessment Center: Family Rooom {transition="fade-in slide-out"}
+
+![Copywrite Dr Kisha Roberts-Tabb](imgs/family_1.png)
+
+## Care and Assessment Center: Family Room {transition="fade-in slide-out"}
+
+![Copywrite Dr Kisha Roberts-Tabb](imgs/family_2.png)
+
+## Care and Assessment Center: Oasis {transition="fade-in slide-out"}
+
+![Copywrite Dr Kisha Roberts-Tabb](imgs/oasis_1.png)
+
+## Care and Assessment Center: Oasis {transition="fade-in slide-out"}
+
+![Copywrite Dr Kisha Roberts-Tabb](imgs/oasis_2.png)
+
+## Thank You
+
+:::::: {.columns}
+::::: {.column width="30%"}
+::: thank-you
+-   The Honorable Timothy Evans
+-   The Honorable Donna Cooper
+-   Dr. Miquel Lewis
+-   Deputy Director Donna Neal
+-   Tamar Stockley
+-   Allyson Loftus
+-   The SDOP Team
+-   And You!
+:::
+:::
+
+::: {.column width="70%"}
+![The authors](imgs/thank-you.jpeg)
+:::
+
+::::::
+<!-- end columns -->

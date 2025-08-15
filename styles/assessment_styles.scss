@@ -1,0 +1,368 @@
+/*-- scss:uses --*/
+@use "./_styles.scss" as st;
+
+/*-- scss:defaults --*/
+
+// Import Font Awesome
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+// Import Montserrat font
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+// Base colors
+$body-color: st.get-color("black");
+$headings-color: st.get-color("red");
+$light-blue: st.get-color("light-blue");
+$deep-blue: st.get-color("deep-blue");
+
+// Typography
+$presentation-heading-font: "Montserrat", sans-serif;
+
+/*-- scss:rules --*/
+
+// All Font Awesome icons - consistent black
+.fas,
+.fa {
+  color: st.get-color("black") !important;
+}
+
+// Base slide styling
+.reveal .slide {
+  background-color: st.get-color("sage");
+  font-family: "Montserrat", sans-serif;
+}
+
+.reveal .slide h1,
+.reveal .slide h2,
+.reveal .slide h3 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+}
+
+// Title slide
+.title-slide {
+  .reveal & {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+
+    h1 {
+      font-size: 3rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
+      font-style: italic;
+      opacity: 0.9;
+    }
+  }
+}
+
+// Section headers - using your palette colors
+.section-header {
+  padding: 1.5rem;
+  border-radius: 15px;
+  color: white !important;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+  &.economic {
+    background: st.get-color("green");
+  }
+
+  &.neighborhood {
+    background: st.get-color("light-blue");
+  }
+
+  &.education {
+    background: st.get-color("deep-blue");
+  }
+
+  &.community {
+    background: st.get-color("teal");
+  }
+
+  &.healthcare {
+    background: st.get-color("red");
+  }
+
+  &.food {
+    background: #B8860B; // Darker yellow for better readability
+  }
+
+  &.public-safety {
+    background: st.get-color("vivid");
+  }
+
+  i {
+    margin-right: 1rem;
+    font-size: 2rem;
+    color: st.get-color("black") !important;
+  }
+}
+
+// Section backgrounds
+.economic-section {
+  .reveal & {
+    background: linear-gradient(135deg, rgba(34, 139, 34, 0.1), rgba(34, 139, 34, 0.05));
+  }
+}
+
+.neighborhood-section {
+  .reveal & {
+    background: linear-gradient(135deg, rgba(80, 162, 167, 0.1), rgba(80, 162, 167, 0.05));
+  }
+}
+
+.education-section {
+  .reveal & {
+    background: linear-gradient(135deg, rgba(0, 6, 177, 0.1), rgba(0, 6, 177, 0.05));
+  }
+}
+
+.community-section {
+  .reveal & {
+    background: linear-gradient(135deg, rgba(0, 128, 128, 0.1), rgba(0, 128, 128, 0.05));
+  }
+}
+
+.healthcare-section {
+  .reveal & {
+    background: linear-gradient(135deg, rgba(155, 41, 21, 0.1), rgba(155, 41, 21, 0.05));
+  }
+}
+
+.food-section {
+  .reveal & {
+    background: linear-gradient(135deg, rgba(184, 134, 11, 0.1), rgba(184, 134, 11, 0.05));
+  }
+}
+
+.safety-section {
+  .reveal & {
+    background: linear-gradient(135deg, rgba(89, 95, 57, 0.1), rgba(89, 95, 57, 0.05));
+  }
+}
+
+// Assessment questions styling - OPTION A with softer grey
+.assessment-questions {
+  .question-card {
+    background: white !important; // Clean white background
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    // Body text uses softer gray (Option A)
+    color: #2c3e50 !important;
+    font-size: 1rem;
+    line-height: 1.4;
+
+    h4,
+    strong {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    em {
+      font-size: 0.9rem;
+      font-style: italic;
+      color: #2c3e50 !important; // Also use softer grey for emphasis
+    }
+  }
+
+  .score-info {
+    background: st.get-color("light-blue");
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 700;
+    margin-top: 1.5rem;
+  }
+}
+
+// Section-specific heading colors (only for headings)
+.economic-section .question-card strong,
+.economic-section .question-card h4 {
+  color: st.get-color("green") !important;
+}
+
+.neighborhood-section .question-card strong,
+.neighborhood-section .question-card h4 {
+  color: st.get-color("light-blue") !important;
+}
+
+.education-section .question-card strong,
+.education-section .question-card h4 {
+  color: st.get-color("deep-blue") !important;
+}
+
+.community-section .question-card strong,
+.community-section .question-card h4 {
+  color: st.get-color("teal") !important;
+}
+
+.healthcare-section .question-card strong,
+.healthcare-section .question-card h4 {
+  color: st.get-color("red") !important;
+}
+
+.food-section .question-card strong,
+.food-section .question-card h4 {
+  color: #B8860B !important; // Darker yellow for better readability
+}
+
+.safety-section .question-card strong,
+.safety-section .question-card h4 {
+  color: st.get-color("vivid") !important;
+}
+
+// Clinical notes
+.clinical-note {
+  background: rgba(233, 180, 76, 0.2);
+  border: 1px solid st.get-color("yellow");
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+
+  i {
+    color: st.get-color("red");
+    margin-right: 0.5rem;
+  }
+
+  strong {
+    color: st.get-color("deep-blue");
+  }
+}
+
+// Summary slide styling
+.summary-slide {
+  .reveal & {
+    background: linear-gradient(135deg, st.get-color("deep-blue"), st.get-color("light-blue"));
+    color: white;
+  }
+}
+
+.scoring-guide {
+  .risk-level {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    font-weight: 600;
+
+    &.low-risk {
+      background: rgba(34, 139, 34, 0.8);
+    }
+
+    &.moderate-risk {
+      background: rgba(233, 180, 76, 0.8);
+    }
+
+    &.high-risk {
+      background: rgba(155, 41, 21, 0.8);
+    }
+
+    &.very-high-risk {
+      background: rgba(89, 95, 57, 0.8);
+    }
+  }
+}
+
+.total-possible {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-top: 1.5rem;
+}
+
+// Implementation slide
+.implementation-slide {
+  .reveal & {
+    background: linear-gradient(135deg, st.get-color("sage"), st.get-color("moss"));
+  }
+}
+
+.implementation-content {
+  .guideline-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    border-left: 4px solid st.get-color("green");
+
+    strong {
+      color: st.get-color("deep-blue");
+    }
+  }
+}
+
+// Questions slide
+.questions-slide {
+  .reveal & {
+    background: linear-gradient(135deg, st.get-color("red"), st.get-color("deep-blue"));
+    color: white;
+    text-align: center;
+  }
+}
+
+.contact-info {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 15px;
+  margin: 2rem 0;
+
+  h3 {
+    margin-bottom: 1rem;
+  }
+}
+
+.footer-note {
+  font-style: italic;
+  opacity: 0.8;
+  margin-top: 2rem;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .section-header {
+    padding: 1rem;
+
+    i {
+      font-size: 1.5rem;
+      margin-right: 0.5rem;
+    }
+  }
+
+  .question-card {
+    padding: 1rem;
+  }
+}
+
+// Enhanced typography
+.reveal .slide {
+  ul li {
+    margin-bottom: 0.5rem;
+  }
+
+  strong {
+    color: st.get-color("deep-blue");
+  }
+
+  em {
+    color: #2c3e50; // Softer grey for emphasis text
+  }
+}
+
+// Footer styling
+.reveal .slide-number {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
+}
