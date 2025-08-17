@@ -51,3 +51,7 @@ rsconnect/
 # Quarto
 /.quarto/
 /_site/
+
+#data
+*.xlsx
+*.xls
