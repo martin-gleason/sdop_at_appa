@@ -1,0 +1,297 @@
+/*-- scss:uses --*/
+@use "./_styles.scss" as s;
+
+/*-- scss:defaults --*/
+// Single font import
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+// Core variables
+$body-color: s.get-color("black");
+$headings-color: s.get-color("red");
+$font-stack: "Montserrat", sans-serif;
+$default-bg: s.get-color("sage");
+
+// Background control
+@function bg-color($color: null) {
+    @if $color {
+        @return s.get-color($color);
+    }
+
+    @return $default-bg;
+}
+
+/*-- scss:rules --*/
+
+// Universal slide background
+.reveal {
+
+    .slide,
+    .slides section,
+    section.present {
+        background: bg-color() !important;
+        font-family: $font-stack;
+    }
+}
+
+// Typography hierarchy
+.reveal {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: $font-stack;
+        font-weight: 700;
+    }
+
+    h1,
+    .quarto-title-block {
+        color: s.get-color("red");
+        padding: 0.3em .5em;
+        background: rgba(255, 255, 255, .5);
+        backdrop-filter: blur(5px);
+        box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5);
+        border-radius: 3px;
+    }
+
+    ul li {
+        font-size: 1.95rem;
+        margin-bottom: 20px;
+    }
+
+    ol li {
+        font-size: 1.65rem !important;
+        margin-bottom: 55px !important;
+    }
+
+    blockquote {
+        border-left: 3px solid s.get-color("grey");
+        padding-left: 0.5em;
+    }
+}
+
+// Icons
+.fas,
+.fa {
+    color: s.get-color("black") !important;
+}
+
+// Section headers
+.section-header {
+    @extend %card-shadow;
+    padding: 1.5rem;
+    border-radius: 15px;
+    color: white !important;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+
+    i {
+        margin-right: 1rem;
+        font-size: 2rem;
+        color: s.get-color("black") !important;
+    }
+
+    @each $section, $color in (economic: "green",
+        neighborhood: "light-blue",
+        education: "deep-blue",
+        community: "teal",
+        healthcare: "red",
+        food: "yellow",
+        public-safety: "vivid"
+
+    ) {
+        &.#{$section} {
+            background: s.get-color($color);
+        }
+    }
+}
+
+// Question cards with colored backgrounds
+.assessment-questions {
+    .question-card {
+        @extend %card-shadow;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        color: white !important;
+        font-size: 1rem;
+        line-height: 1.4;
+
+        h4,
+        strong {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: inherit !important;
+        }
+
+        em {
+            font-size: 0.9rem;
+            font-style: italic;
+            opacity: 0.9;
+        }
+    }
+
+    .score-info {
+        @extend %card-shadow;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: 700;
+        margin-top: 1.5rem;
+        border: 2px solid white;
+    }
+}
+
+// Apply category colors to cards
+@each $section, $color in (economic: "green",
+    neighborhood: "light-blue",
+    education: "deep-blue",
+    community: "teal",
+    healthcare: "red",
+    food: "yellow",
+    safety: "vivid"
+
+) {
+    .#{$section}-section .question-card {
+        background: s.get-color($color) !important;
+
+        // Special handling for light backgrounds
+        @if $color =="yellow" {
+            color: s.get-color("black") !important;
+
+            h4,
+            strong,
+            em {
+                color: s.get-color("black") !important;
+            }
+        }
+    }
+}
+
+// Key point emphasis slides
+.key-point {
+    @include full-screen-center();
+
+    h3 {
+        color: s.get-color("red") !important;
+        font-weight: s.weight("bold") !important;
+        font-size: clamp(2.5rem, 6vw, 5rem) !important;
+        line-height: 1.2 !important;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        padding: 2rem !important;
+        max-width: 95vw;
+
+        // Color modifiers
+        @each $color in (red, yellow, green, teal, deep-blue) {
+            .#{$color} & {
+                color: s.get-color($color) !important;
+            }
+        }
+    }
+}
+
+// Utility classes
+.map {
+    @include full-viewport();
+
+    .leaflet-container,
+    .cell-output-display {
+        height: 85vh !important;
+        width: 95vw !important;
+        margin: 0 auto !important;
+    }
+}
+
+.thank-you ul {
+    @include styled-list("\f004", s.get-color("red"));
+}
+
+// Shared styles
+%card-shadow {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+// Mixins
+@mixin full-screen-center {
+    .reveal & {
+        height: 100vh !important;
+        width: 100vw !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+
+        .slide-number,
+        .controls {
+            display: none !important;
+        }
+    }
+}
+
+@mixin full-viewport {
+    .reveal & {
+        height: 100vh !important;
+        width: 100vw !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
+
+@mixin styled-list($icon, $color) {
+    list-style: none !important;
+    padding: 0 !important;
+
+    li {
+        color: s.get-color("black") !important;
+        font-size: 1.8rem !important;
+        font-weight: s.weight("bold") !important;
+        margin-bottom: 1.2rem !important;
+        padding: 0.8rem !important;
+
+        &::before {
+            font-family: 'Font Awesome 6 Free' !important;
+            content: $icon !important;
+            font-weight: 900 !important;
+            margin-right: 15px !important;
+            color: $color !important;
+            font-size: 1.5rem !important;
+        }
+    }
+}
+
+// Special slides
+.summary-slide {
+    background: linear-gradient(135deg, s.get-color("deep-blue"), s.get-color("light-blue")) !important;
+    color: white;
+}
+
+.implementation-slide {
+    background: linear-gradient(135deg, bg-color(), s.get-color("vivid")) !important;
+}
+
+// Responsive
+@media (max-width: 768px) {
+    .section-header {
+        padding: 1rem;
+    }
+
+    .question-card {
+        padding: 1rem;
+    }
+
+    .reveal ul li {
+        font-size: 1.5rem;
+    }
+
+    .reveal ol li {
+        font-size: 1.3rem !important;
+    }
+}

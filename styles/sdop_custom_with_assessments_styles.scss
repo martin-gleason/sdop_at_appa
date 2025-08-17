@@ -1,0 +1,545 @@
+/*-- scss:uses --*/
+@use "./_styles.scss" as s;
+
+/*-- scss:defaults --*/
+// Font imports - keeping these separate for clarity
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+// =============================================================================
+// BASE CONFIGURATION VARIABLES
+// =============================================================================
+// These variables control the core appearance of your presentation
+$body-color: s.get-color("black"); // Default text color
+$headings-color: s.get-color("red"); // Default heading color
+$font-stack: "Montserrat", sans-serif; // Primary font family
+$default-bg: s.get-color("sage"); // Default slide background
+
+// =============================================================================
+// BACKGROUND CONTROL FUNCTION
+// =============================================================================
+// This function allows you to easily change the background color of all slides
+// Usage: background: get-slide-bg(); // Uses default
+// Usage: background: get-slide-bg("grey"); // Uses specific color
+@function get-slide-bg($color: null) {
+    @if $color {
+        @return s.get-color($color);
+    }
+
+    @return $default-bg;
+}
+
+// =============================================================================
+// CARD BACKGROUND FUNCTION
+// =============================================================================
+// Controls the background color of question cards
+// Can be overridden per section or globally
+@function get-card-bg($section: null) {
+    // Map each section to its color
+    $section-colors: (
+        "economic": "green",
+        "neighborhood": "light-blue",
+        "education": "deep-blue",
+        "community": "teal",
+        "healthcare": "red",
+        "food": "yellow",
+        "safety": "vivid"
+    );
+
+@if $section and map-has-key($section-colors, $section) {
+    @return s.get-color(map-get($section-colors, $section));
+}
+
+@return white; // Default to white if no section specified
+}
+
+/*-- scss:rules --*/
+
+// =============================================================================
+// UNIVERSAL SLIDE BACKGROUNDS
+// =============================================================================
+// This ensures ALL slides have the same background color
+// The !important declarations override any theme defaults
+.reveal {
+
+    // Base slide background
+    .slide {
+        background: get-slide-bg() !important;
+        font-family: $font-stack;
+    }
+
+    // Ensure sections and present slides also get the background
+    .slides section,
+    section.present {
+        background: get-slide-bg() !important;
+    }
+
+    // Force background on all assessment section types
+    section.economic-section,
+    section.neighborhood-section,
+    section.education-section,
+    section.community-section,
+    section.healthcare-section,
+    section.food-section,
+    section.safety-section {
+        background: get-slide-bg() !important;
+    }
+}
+
+// =============================================================================
+// TYPOGRAPHY
+// =============================================================================
+// Consistent font sizing and spacing throughout the presentation
+.reveal {
+
+    // Heading styles
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: $font-stack;
+        font-weight: 700;
+    }
+
+    // Title slide and main headings
+    h1,
+    .quarto-title-block {
+        color: $headings-color;
+        padding: 0.3em .5em;
+        background: rgba(255, 255, 255, .5);
+        backdrop-filter: blur(5px);
+        box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5);
+        border-radius: 3px;
+    }
+
+    // List items
+    ul li {
+        font-size: 1.95rem;
+        margin-bottom: 20px;
+    }
+
+    ol li {
+        font-size: 1.65rem !important;
+        margin-bottom: 55px !important;
+    }
+
+    // Blockquotes
+    blockquote {
+        border-left: 3px solid s.get-color("grey");
+        padding-left: 0.5em;
+    }
+
+    // Captions
+    figure>figcaption,
+    img.r-stretch+p.caption {
+        font-size: .7rem;
+    }
+}
+
+// =============================================================================
+// ICONS
+// =============================================================================
+// All Font Awesome icons use consistent black color
+.fas,
+.fa {
+    color: s.get-color("black") !important;
+}
+
+// =============================================================================
+// SECTION HEADERS
+// =============================================================================
+// These are the colored headers at the top of each assessment section
+.section-header {
+    padding: 1.5rem;
+    border-radius: 15px;
+    color: white !important;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+    // Icons within headers
+    i {
+        margin-right: 1rem;
+        font-size: 2rem;
+        color: s.get-color("black") !important;
+    }
+
+    // Section-specific background colors
+    &.economic {
+        background: s.get-color("green");
+    }
+
+    &.neighborhood {
+        background: s.get-color("light-blue");
+    }
+
+    &.education {
+        background: s.get-color("deep-blue");
+    }
+
+    &.community {
+        background: s.get-color("teal");
+    }
+
+    &.healthcare {
+        background: s.get-color("red");
+    }
+
+    &.food {
+        background: s.get-color("yellow");
+    }
+
+    &.public-safety {
+        background: s.get-color("vivid");
+    }
+}
+
+// =============================================================================
+// ASSESSMENT QUESTIONS AND CARDS
+// =============================================================================
+// This is the core styling for the question cards in each assessment section
+.assessment-questions {
+
+    // Question card container - gets category-specific background
+    .question-card {
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        font-size: 1rem;
+        line-height: 1.4;
+
+        // Default white text for colored backgrounds
+        color: white !important;
+
+        // Headings within cards
+        h4,
+        strong {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: inherit !important; // Inherit from parent
+        }
+
+        // Emphasis text (scoring information)
+        em {
+            font-size: 0.9rem;
+            font-style: italic;
+            opacity: 0.9; // Slightly transparent for visual hierarchy
+        }
+    }
+
+    // Score information boxes
+    .score-info {
+        background: rgba(255, 255, 255, 0.2) !important;
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: 700;
+        margin-top: 1.5rem;
+        border: 2px solid white;
+    }
+}
+
+// =============================================================================
+// SECTION-SPECIFIC CARD BACKGROUNDS
+// =============================================================================
+// Each assessment section gets its own card background color
+.economic-section .assessment-questions .question-card {
+    background: get-card-bg("economic") !important;
+}
+
+.neighborhood-section .assessment-questions .question-card {
+    background: get-card-bg("neighborhood") !important;
+}
+
+.education-section .assessment-questions .question-card {
+    background: get-card-bg("education") !important;
+}
+
+.community-section .assessment-questions .question-card {
+    background: get-card-bg("community") !important;
+}
+
+.healthcare-section .assessment-questions .question-card {
+    background: get-card-bg("healthcare") !important;
+}
+
+.food-section .assessment-questions .question-card {
+    background: get-card-bg("food") !important;
+    // Special handling for yellow background - use black text for readability
+    color: s.get-color("black") !important;
+
+    h4,
+    strong,
+    em {
+        color: s.get-color("black") !important;
+    }
+}
+
+.safety-section .assessment-questions .question-card {
+    background: get-card-bg("safety") !important;
+}
+
+// =============================================================================
+// KEY POINT EMPHASIS SLIDES
+// =============================================================================
+// Full-screen centered text for emphasis
+.key-point {
+    .reveal & {
+        // Full viewport centering
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 100vh !important;
+        width: 100vw !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+        background: transparent !important;
+
+        // Hide navigation elements
+        .slide-number {
+            display: none !important;
+        }
+
+        .controls {
+            opacity: 0.1 !important;
+            transition: opacity 0.3s ease;
+
+            &:hover {
+                opacity: 1 !important;
+            }
+        }
+    }
+
+    // Large centered text
+    h3 {
+        color: s.get-color("red") !important;
+        font-weight: s.weight("bold") !important;
+        font-size: clamp(2.5rem, 6vw, 5rem) !important; // Responsive sizing
+        line-height: 1.2 !important;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        margin: 0 !important;
+        padding: 2rem !important;
+        max-width: 95vw;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+
+    // Color variants for key points
+    &.red h3 {
+        color: s.get-color("red") !important;
+    }
+
+    &.yellow h3 {
+        color: s.get-color("yellow") !important;
+    }
+
+    &.green h3 {
+        color: s.get-color("green") !important;
+    }
+
+    &.teal h3 {
+        color: s.get-color("teal") !important;
+    }
+
+    &.deep-blue h3 {
+        color: s.get-color("deep-blue") !important;
+    }
+}
+
+// =============================================================================
+// UTILITY CLASSES
+// =============================================================================
+// Various helper classes for specific content types
+
+// Headshot styling
+.head_shot {
+    text-align: center;
+    max-width: 100%;
+
+    figcaption {
+        color: s.get-color("deep-blue");
+        font-style: italic;
+    }
+}
+
+// Subtitle styling
+.subtitle {
+    font-style: italic;
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+// Incremental highlight effect
+.highlight-last {
+    color: s.get-color("light-blue");
+
+    .current-fragment {
+        color: s.get-color("deep-blue");
+    }
+}
+
+// =============================================================================
+// MAP DISPLAY
+// =============================================================================
+// Full-screen map display for geographic data
+.map {
+    .reveal & {
+        height: 100vh !important;
+        width: 100vw !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .leaflet-container,
+    .cell-output-display {
+        height: 85vh !important;
+        width: 95vw !important;
+        margin: 0 auto !important;
+    }
+
+    h2 {
+        font-size: 2rem !important;
+        margin: 10px 0 !important;
+        text-align: center;
+    }
+}
+
+// =============================================================================
+// DEFAULT OVERRIDE CLASS
+// =============================================================================
+// Use this class to force default styling on specific slides
+.default-override {
+    .reveal & {
+        font-family: $font-stack !important;
+        color: s.get-color("black") !important;
+        background: get-slide-bg() !important;
+    }
+
+    // Override all text to black
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    strong,
+    b,
+    ul li,
+    ol li {
+        color: s.get-color("black") !important;
+    }
+
+    // Special section header styling for default override
+    .section-header {
+        padding: 1.5rem;
+        border-radius: 15px;
+        color: s.get-color("black") !important;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        background: white !important;
+        border: 2px solid s.get-color("black");
+
+        i {
+            margin-right: 1rem;
+            font-size: 2rem;
+            color: s.get-color("black") !important;
+        }
+    }
+}
+
+// =============================================================================
+// THANK YOU SLIDE
+// =============================================================================
+// Custom bullet points with heart icons
+.thank-you {
+    ul {
+        list-style: none !important;
+        padding: 0 !important;
+        margin: 2rem 0 !important;
+
+        li {
+            color: s.get-color("black") !important;
+            font-size: 1.8rem !important;
+            font-weight: s.weight("bold") !important;
+            margin-bottom: 1.2rem !important;
+            padding: 0.8rem !important;
+            position: relative !important;
+
+            // Heart icon before each item
+            &::before {
+                font-family: 'Font Awesome 6 Free' !important;
+                content: "\f004" !important; // Heart icon
+                font-weight: 900 !important;
+                margin-right: 15px !important;
+                color: s.get-color("red") !important;
+                font-size: 1.5rem !important;
+            }
+        }
+    }
+}
+
+// =============================================================================
+// CLINICAL NOTES
+// =============================================================================
+// Informational notes with special styling
+.clinical-note {
+    background: rgba(233, 180, 76, 0.2);
+    border: 1px solid s.get-color("yellow");
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+
+    i {
+        color: s.get-color("red");
+        margin-right: 0.5rem;
+    }
+
+    strong {
+        color: s.get-color("deep-blue");
+    }
+}
+
+// =============================================================================
+// SPECIAL SLIDES
+// =============================================================================
+// These slides have unique gradient backgrounds
+
+// Summary slide with blue gradient
+.summary-slide {
+    background: linear-gradient(135deg, s.get-color("deep-blue"), s.get-color("light-blue")) !important;
+    color: white;
+}
+
+// Implementation slide with sage to vivid gradient
+.implementation-slide {
+    background: linear-gradient(135deg, get-slide-bg(), s.get-color("vivid")) !important;
+}
+
+// =============================================================================
+// RESPONSIVE DESIGN
+// =============================================================================
+// Adjustments for smaller screens
+@media (max-width: 768px) {
+    .section-header {
+        padding: 1rem;
+
+        i {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+    }
+
+    .question-card {
+        padding: 1rem;
+    }
+}

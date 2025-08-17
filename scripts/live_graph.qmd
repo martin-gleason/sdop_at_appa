@@ -1,0 +1,361 @@
+---
+title: "Chicago Probation Success Rate Dashboard"
+format: live-html
+engine: knitr
+---
+
+```{webr-r}
+#| context: setup
+#| message: false
+#| warning: false
+
+# Install and load required packages
+webr::install("leaflet")
+webr::install("dplyr")
+webr::install("sf")
+webr::install("shiny")
+webr::install("viridis")
+webr::install("RColorBrewer")
+
+library(shiny)
+library(leaflet)
+library(dplyr)
+library(sf)
+library(viridis)
+library(RColorBrewer)
+
+# Simulate your data structure based on your variables
+# In a real implementation, you'd load your actual data files here
+
+# Create sample closure data
+set.seed(42)
+zip_codes <- c(
+  "60601",
+  "60602",
+  "60603",
+  "60604",
+  "60605",
+  "60606",
+  "60607",
+  "60608",
+  "60609",
+  "60610",
+  "60611",
+  "60612",
+  "60613",
+  "60614",
+  "60615",
+  "60616",
+  "60617",
+  "60618",
+  "60619",
+  "60620",
+  "60621",
+  "60622",
+  "60623",
+  "60624",
+  "60625",
+  "60626",
+  "60627",
+  "60628",
+  "60629",
+  "60630"
+)
+
+races <- c("Black", "White", "Hispanic or Latino", "Asian", "Other")
+genders <- c("Male", "Female")
+risk_levels <- c("LOW", "MODERATE", "HIGH")
+results <- c("Successful", "Unsuccessful")
+
+# Generate sample data
+n_records <- 1000
+closure_by_success <- data.frame(
+  zip = sample(zip_codes, n_records, replace = TRUE),
+  risk_level = sample(risk_levels, n_records, replace = TRUE),
+  sub_result = sample(results, n_records, replace = TRUE, prob = c(0.6, 0.4)),
+  race = sample(races, n_records, replace = TRUE),
+  gender = sample(genders, n_records, replace = TRUE),
+  count = sample(1:5, n_records, replace = TRUE)
+) |>
+  group_by(zip, risk_level, sub_result, race, gender) |>
+  summarise(count = sum(count), .groups = "drop")
+
+# Create sample Chicago zip code polygons (simplified rectangles for demo)
+chicago_bounds <- list(
+  lat_min = 41.644,
+  lat_max = 42.023,
+  lng_min = -87.940,
+  lng_max = -87.524
+)
+
+# Generate sample polygon coordinates for each zip code
+chicago_zip <- data.frame(
+  zip = zip_codes,
+  lat = runif(
+    length(zip_codes),
+    chicago_bounds$lat_min,
+    chicago_bounds$lat_max
+  ),
+  lng = runif(length(zip_codes), chicago_bounds$lng_min, chicago_bounds$lng_max)
+) |>
+  rowwise() |>
+  mutate(
+    # Create simple rectangular polygons for each zip
+    geometry = list(list(
+      c(lng - 0.01, lat - 0.01),
+      c(lng + 0.01, lat - 0.01),
+      c(lng + 0.01, lat + 0.01),
+      c(lng - 0.01, lat + 0.01),
+      c(lng - 0.01, lat - 0.01)
+    ))
+  ) |>
+  ungroup()
+
+# Function to calculate success rates by demographics
+calculate_success_rates <- function(data, demo_filter = "All") {
+  if (demo_filter == "All") {
+    filtered_data <- data
+  } else if (demo_filter %in% races) {
+    filtered_data <- data |> filter(race == demo_filter)
+  } else if (demo_filter %in% genders) {
+    filtered_data <- data |> filter(gender == demo_filter)
+  } else {
+    filtered_data <- data
+  }
+
+  result <- filtered_data |>
+    group_by(zip) |>
+    summarise(
+      total_cases = sum(count),
+      successful_cases = sum(count[sub_result == "Successful"]),
+      success_rate = successful_cases / total_cases,
+      .groups = "drop"
+    ) |>
+    filter(total_cases > 0) # Only include zips with cases
+
+  return(result)
+}
+
+# Color palette for success rates (colorblind-safe)
+success_pal <- colorNumeric(
+  palette = "RdYlGn",
+  domain = c(0, 1),
+  reverse = FALSE
+)
+
+# Color palette for risk visualization
+risk_colors <- c("LOW" = "#2ecc71", "MODERATE" = "#f39c12", "HIGH" = "#e74c3c")
+```
+
+```{webr-r}
+#| context: server
+
+# Define UI
+ui <- fluidPage(
+  titlePanel("Chicago Probation Success Rates by Zip Code"),
+
+  sidebarLayout(
+    sidebarPanel(
+      width = 3,
+      h4("Filter Options"),
+
+      radioButtons(
+        "demo_filter",
+        "Demographic Filter:",
+        choices = list(
+          "All Cases" = "All",
+          "--- By Race ---" = "",
+          "Black" = "Black",
+          "White" = "White",
+          "Hispanic or Latino" = "Hispanic or Latino",
+          "Asian" = "Asian",
+          "Other Race" = "Other",
+          "--- By Gender ---" = "",
+          "Male" = "Male",
+          "Female" = "Female"
+        ),
+        selected = "All"
+      ),
+
+      br(),
+
+      h4("Map Information"),
+      p("Colors represent success rates:"),
+      tags$ul(
+        tags$li(
+          tags$span("Red:", style = "color: #d73027; font-weight: bold;"),
+          " Low success rates"
+        ),
+        tags$li(
+          tags$span("Yellow:", style = "color: #fee08b; font-weight: bold;"),
+          " Moderate success rates"
+        ),
+        tags$li(
+          tags$span("Green:", style = "color: #1a9850; font-weight: bold;"),
+          " High success rates"
+        )
+      ),
+
+      br(),
+
+      verbatimTextOutput("summary_stats")
+    ),
+
+    mainPanel(
+      width = 9,
+      leafletOutput("map", height = "600px"),
+      br(),
+      h4("Data Summary"),
+      tableOutput("data_table")
+    )
+  )
+)
+
+# Define Server
+server <- function(input, output, session) {
+  # Reactive data based on demographic filter
+  filtered_data <- reactive({
+    req(input$demo_filter)
+
+    # Skip separator items
+    if (input$demo_filter == "") {
+      return(calculate_success_rates(closure_by_success, "All"))
+    }
+
+    calculate_success_rates(closure_by_success, input$demo_filter)
+  })
+
+  # Create the map
+  output$map <- renderLeaflet({
+    data <- filtered_data()
+
+    # Create map data by joining with zip boundaries
+    map_data <- chicago_zip |>
+      left_join(data, by = "zip") |>
+      mutate(
+        success_rate = ifelse(is.na(success_rate), 0, success_rate),
+        total_cases = ifelse(is.na(total_cases), 0, total_cases),
+        popup_text = paste0(
+          "<b>Zip Code:</b> ",
+          zip,
+          "<br>",
+          "<b>Total Cases:</b> ",
+          total_cases,
+          "<br>",
+          "<b>Success Rate:</b> ",
+          round(success_rate * 100, 1),
+          "%"
+        )
+      )
+
+    # Create polygons for leaflet
+    polygons <- map_data |>
+      rowwise() |>
+      do({
+        coords <- .$geometry[[1]]
+        lat_coords <- sapply(coords, function(x) x[2])
+        lng_coords <- sapply(coords, function(x) x[1])
+
+        data.frame(
+          zip = .$zip,
+          lat = I(list(lat_coords)),
+          lng = I(list(lng_coords)),
+          success_rate = .$success_rate,
+          total_cases = .$total_cases,
+          popup_text = .$popup_text
+        )
+      })
+
+    # Create the leaflet map
+    m <- leaflet() |>
+      addTiles() |>
+      setView(lng = -87.7, lat = 41.85, zoom = 11)
+
+    # Add polygons
+    for (i in 1:nrow(polygons)) {
+      if (polygons$total_cases[i] > 0) {
+        m <- m |>
+          addPolygons(
+            lat = polygons$lat[[i]],
+            lng = polygons$lng[[i]],
+            fillColor = success_pal(polygons$success_rate[i]),
+            fillOpacity = 0.7,
+            color = "black",
+            weight = 2,
+            popup = polygons$popup_text[i],
+            label = paste("Zip:", polygons$zip[i])
+          )
+      }
+    }
+
+    # Add legend
+    m <- m |>
+      addLegend(
+        pal = success_pal,
+        values = c(0, 1),
+        opacity = 0.7,
+        title = "Success Rate",
+        position = "bottomright",
+        labFormat = labelFormat(suffix = "%", transform = function(x) x * 100)
+      )
+
+    return(m)
+  })
+
+  # Summary statistics
+  output$summary_stats <- renderText({
+    data <- filtered_data()
+
+    if (nrow(data) == 0) {
+      return("No data available for selected filter.")
+    }
+
+    total_cases <- sum(data$total_cases, na.rm = TRUE)
+    avg_success_rate <- weighted.mean(
+      data$success_rate,
+      data$total_cases,
+      na.rm = TRUE
+    )
+    zip_count <- nrow(data)
+
+    paste0(
+      "Filter: ",
+      input$demo_filter,
+      "\n",
+      "Zip Codes: ",
+      zip_count,
+      "\n",
+      "Total Cases: ",
+      total_cases,
+      "\n",
+      "Avg Success Rate: ",
+      round(avg_success_rate * 100, 1),
+      "%"
+    )
+  })
+
+  # Data table
+  output$data_table <- renderTable(
+    {
+      data <- filtered_data() |>
+        arrange(desc(success_rate)) |>
+        mutate(
+          success_rate = paste0(round(success_rate * 100, 1), "%")
+        ) |>
+        select(
+          `Zip Code` = zip,
+          `Total Cases` = total_cases,
+          `Success Rate` = success_rate
+        ) |>
+        head(10)
+
+      return(data)
+    },
+    striped = TRUE,
+    hover = TRUE
+  )
+}
+
+# Run the application
+shinyApp(ui = ui, server = server)
+```

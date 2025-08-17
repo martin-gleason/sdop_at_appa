@@ -1,0 +1,685 @@
+/*-- scss:uses --*/
+@use "./_styles.scss" as s;
+
+/*-- scss:defaults --*/
+// Font imports - keeping these separate for clarity
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+// =============================================================================
+// BASE CONFIGURATION VARIABLES
+// =============================================================================
+// These variables control the core appearance of your presentation
+$body-color: s.get-color("black"); // Default text color
+$headings-color: s.get-color("red"); // Default heading color
+$font-stack: "Montserrat", sans-serif; // Primary font family
+$default-bg: s.get-color("sage"); // Default slide background
+
+// Professional styling variables
+$card-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+$card-hover-shadow: 0 12px 40px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
+$border-subtle: rgba(255, 255, 255, 0.2);
+$text-shadow-dark: 1px 1px 2px rgba(0, 0, 0, 0.3);
+$text-shadow-light: 1px 1px 2px rgba(255, 255, 255, 0.3);
+
+// =============================================================================
+// BACKGROUND CONTROL FUNCTION
+// =============================================================================
+// This function allows you to easily change the background color of all slides
+// Usage: background: get-slide-bg(); // Uses default
+// Usage: background: get-slide-bg("grey"); // Uses specific color
+@function get-slide-bg($color: null) {
+    @if $color {
+        @return s.get-color($color);
+    }
+
+    @return $default-bg;
+}
+
+// =============================================================================
+// CARD BACKGROUND FUNCTION
+// =============================================================================
+// Controls the background color of question cards
+// Can be overridden per section or globally
+@function get-card-bg($section: null) {
+    // Map each section to its color
+    $section-colors: (
+        "economic": "green",
+        "neighborhood": "light-blue",
+        "education": "deep-blue",
+        "community": "teal",
+        "healthcare": "red",
+        "food": "yellow",
+        "safety": "vivid"
+    );
+
+@if $section and map-has-key($section-colors, $section) {
+    @return s.get-color(map-get($section-colors, $section));
+}
+
+@return white; // Default to white if no section specified
+}
+
+// =============================================================================
+// TEXT COLOR FUNCTION
+// =============================================================================
+// Determines appropriate text color based on background
+@function get-text-color($bg-section: null) {
+
+    // Yellow backgrounds need black text for readability
+    @if $bg-section =="food" {
+        @return s.get-color("black");
+    }
+
+    // All other colors use white text
+    @return white;
+}
+
+/*-- scss:rules --*/
+
+// =============================================================================
+// UNIVERSAL SLIDE BACKGROUNDS
+// =============================================================================
+// This ensures ALL slides have the same background color
+// The !important declarations override any theme defaults
+.reveal {
+
+    // Base slide background
+    .slide {
+        background: get-slide-bg() !important;
+        font-family: $font-stack;
+    }
+
+    // Ensure sections and present slides also get the background
+    .slides section,
+    section.present {
+        background: get-slide-bg() !important;
+    }
+
+    // Force background on all assessment section types
+    section.economic-section,
+    section.neighborhood-section,
+    section.education-section,
+    section.community-section,
+    section.healthcare-section,
+    section.food-section,
+    section.safety-section {
+        background: get-slide-bg() !important;
+    }
+}
+
+// =============================================================================
+// TYPOGRAPHY
+// =============================================================================
+// Consistent font sizing and spacing throughout the presentation
+.reveal {
+
+    // Heading styles
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: $font-stack;
+        font-weight: 700;
+    }
+
+    // Title slide and main headings
+    h1,
+    .quarto-title-block {
+        color: $headings-color;
+        padding: 0.3em .5em;
+        background: rgba(255, 255, 255, .5);
+        backdrop-filter: blur(5px);
+        box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5);
+        border-radius: 3px;
+    }
+
+    // List items
+    ul li {
+        font-size: 1.95rem;
+        margin-bottom: 20px;
+    }
+
+    ol li {
+        font-size: 1.65rem !important;
+        margin-bottom: 55px !important;
+    }
+
+    // Blockquotes
+    blockquote {
+        border-left: 3px solid s.get-color("grey");
+        padding-left: 0.5em;
+    }
+
+    // Captions
+    figure>figcaption,
+    img.r-stretch+p.caption {
+        font-size: .7rem;
+    }
+}
+
+// =============================================================================
+// ICONS
+// =============================================================================
+// All Font Awesome icons use consistent black color
+.fas,
+.fa {
+    color: s.get-color("black") !important;
+}
+
+// =============================================================================
+// SECTION HEADERS
+// =============================================================================
+// These are the colored headers at the top of each assessment section
+.section-header {
+    padding: 1.5rem;
+    border-radius: 15px;
+    color: white !important;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    box-shadow: $card-shadow;
+    position: relative;
+    overflow: hidden;
+
+    // Subtle gradient overlay for depth
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%);
+        pointer-events: none;
+    }
+
+    // Icons within headers
+    i {
+        margin-right: 1rem;
+        font-size: 2rem;
+        color: s.get-color("black") !important;
+        text-shadow: $text-shadow-light;
+    }
+
+    // Section-specific background colors
+    &.economic {
+        background: s.get-color("green");
+    }
+
+    &.neighborhood {
+        background: s.get-color("light-blue");
+    }
+
+    &.education {
+        background: s.get-color("deep-blue");
+    }
+
+    &.community {
+        background: s.get-color("teal");
+    }
+
+    &.healthcare {
+        background: s.get-color("red");
+    }
+
+    &.food {
+        background: s.get-color("yellow");
+        color: s.get-color("black") !important;
+
+        i {
+            color: s.get-color("black") !important;
+        }
+    }
+
+    &.public-safety {
+        background: s.get-color("vivid");
+    }
+}
+
+// =============================================================================
+// ASSESSMENT QUESTIONS AND CARDS - PROFESSIONAL DEPTH
+// =============================================================================
+// This is the core styling for the question cards in each assessment section
+.assessment-questions {
+
+    // Question card container - gets category-specific background with depth
+    .question-card {
+        // Professional depth with multiple shadows
+        box-shadow: $card-shadow;
+        border: 1px solid $border-subtle;
+        border-radius: 12px;
+        padding: 1.75rem;
+        margin: 1.25rem 0;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+
+        // Default white text for colored backgrounds
+        color: white !important;
+
+        // Subtle gradient overlay for professional look
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%);
+            pointer-events: none;
+        }
+
+        // Hover effect for interactivity
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: $card-hover-shadow;
+        }
+
+        // Headings within cards
+        h4,
+        strong {
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: inherit !important;
+            text-shadow: $text-shadow-dark;
+            position: relative; // Above gradient overlay
+            font-size: 1.15rem;
+        }
+
+        // Emphasis text (scoring information)
+        em {
+            font-size: 0.95rem;
+            font-style: italic;
+            opacity: 0.95;
+            display: block;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+            position: relative;
+        }
+
+        // Lists within cards
+        ul,
+        ol {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+        }
+    }
+
+    // Score information boxes with professional styling
+    .score-info {
+        background: rgba(255, 255, 255, 0.95) !important;
+        color: s.get-color("deep-blue") !important;
+        padding: 1.25rem;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: 700;
+        margin-top: 2rem;
+        box-shadow: $card-shadow;
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        font-size: 1.1rem;
+        letter-spacing: 0.5px;
+    }
+}
+
+// =============================================================================
+// SECTION-SPECIFIC CARD BACKGROUNDS WITH PROPER CONTRAST
+// =============================================================================
+// Each assessment section gets its own card background color with appropriate text
+.economic-section .assessment-questions .question-card {
+    background: get-card-bg("economic") !important;
+    color: get-text-color("economic") !important;
+
+    h4,
+    strong,
+    em {
+        color: get-text-color("economic") !important;
+    }
+}
+
+.neighborhood-section .assessment-questions .question-card {
+    background: get-card-bg("neighborhood") !important;
+    color: get-text-color("neighborhood") !important;
+
+    h4,
+    strong,
+    em {
+        color: get-text-color("neighborhood") !important;
+    }
+}
+
+.education-section .assessment-questions .question-card {
+    background: get-card-bg("education") !important;
+    color: get-text-color("education") !important;
+
+    h4,
+    strong,
+    em {
+        color: get-text-color("education") !important;
+    }
+}
+
+.community-section .assessment-questions .question-card {
+    background: get-card-bg("community") !important;
+    color: get-text-color("community") !important;
+
+    h4,
+    strong,
+    em {
+        color: get-text-color("community") !important;
+    }
+}
+
+.healthcare-section .assessment-questions .question-card {
+    background: get-card-bg("healthcare") !important;
+    color: get-text-color("healthcare") !important;
+
+    h4,
+    strong,
+    em {
+        color: get-text-color("healthcare") !important;
+    }
+}
+
+.food-section .assessment-questions .question-card {
+    background: get-card-bg("food") !important;
+    color: get-text-color("food") !important;
+
+    h4,
+    strong,
+    em {
+        color: get-text-color("food") !important;
+        text-shadow: none; // Remove shadow for black text
+    }
+
+    // Adjust emphasis background for yellow cards
+    em {
+        background: rgba(0, 0, 0, 0.05);
+    }
+}
+
+.safety-section .assessment-questions .question-card {
+    background: get-card-bg("safety") !important;
+    color: get-text-color("safety") !important;
+
+    h4,
+    strong,
+    em {
+        color: get-text-color("safety") !important;
+    }
+}
+
+// =============================================================================
+// KEY POINT EMPHASIS SLIDES
+// =============================================================================
+// Full-screen centered text for emphasis
+.key-point {
+    .reveal & {
+        // Full viewport centering
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 100vh !important;
+        width: 100vw !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+        background: transparent !important;
+
+        // Hide navigation elements
+        .slide-number {
+            display: none !important;
+        }
+
+        .controls {
+            opacity: 0.1 !important;
+            transition: opacity 0.3s ease;
+
+            &:hover {
+                opacity: 1 !important;
+            }
+        }
+    }
+
+    // Large centered text
+    h3 {
+        color: s.get-color("red") !important;
+        font-weight: s.weight("bold") !important;
+        font-size: clamp(2.5rem, 6vw, 5rem) !important;
+        line-height: 1.2 !important;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        margin: 0 !important;
+        padding: 2rem !important;
+        max-width: 95vw;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+
+    // Color variants for key points
+    &.red h3 {
+        color: s.get-color("red") !important;
+    }
+
+    &.yellow h3 {
+        color: s.get-color("yellow") !important;
+    }
+
+    &.green h3 {
+        color: s.get-color("green") !important;
+    }
+
+    &.teal h3 {
+        color: s.get-color("teal") !important;
+    }
+
+    &.deep-blue h3 {
+        color: s.get-color("deep-blue") !important;
+    }
+}
+
+// =============================================================================
+// UTILITY CLASSES
+// =============================================================================
+// Various helper classes for specific content types
+
+// Headshot styling
+.head_shot {
+    text-align: center;
+    max-width: 100%;
+
+    figcaption {
+        color: s.get-color("deep-blue");
+        font-style: italic;
+    }
+}
+
+// Subtitle styling
+.subtitle {
+    font-style: italic;
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+// Incremental highlight effect
+.highlight-last {
+    color: s.get-color("light-blue");
+
+    .current-fragment {
+        color: s.get-color("deep-blue");
+    }
+}
+
+// =============================================================================
+// MAP DISPLAY
+// =============================================================================
+// Full-screen map display for geographic data
+.map {
+    .reveal & {
+        height: 100vh !important;
+        width: 100vw !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .leaflet-container,
+    .cell-output-display {
+        height: 85vh !important;
+        width: 95vw !important;
+        margin: 0 auto !important;
+    }
+
+    h2 {
+        font-size: 2rem !important;
+        margin: 10px 0 !important;
+        text-align: center;
+    }
+}
+
+// =============================================================================
+// DEFAULT OVERRIDE CLASS
+// =============================================================================
+// Use this class to force default styling on specific slides
+.default-override {
+    .reveal & {
+        font-family: $font-stack !important;
+        color: s.get-color("black") !important;
+        background: get-slide-bg() !important;
+    }
+
+    // Override all text to black
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    strong,
+    b,
+    ul li,
+    ol li {
+        color: s.get-color("black") !important;
+    }
+
+    // Special section header styling for default override
+    .section-header {
+        padding: 1.5rem;
+        border-radius: 15px;
+        color: s.get-color("black") !important;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 2rem;
+        box-shadow: $card-shadow;
+        background: white !important;
+        border: 2px solid s.get-color("black");
+
+        i {
+            margin-right: 1rem;
+            font-size: 2rem;
+            color: s.get-color("black") !important;
+        }
+    }
+}
+
+// =============================================================================
+// THANK YOU SLIDE
+// =============================================================================
+// Custom bullet points with heart icons
+.thank-you {
+    ul {
+        list-style: none !important;
+        padding: 0 !important;
+        margin: 2rem 0 !important;
+
+        li {
+            color: s.get-color("black") !important;
+            font-size: 1.8rem !important;
+            font-weight: s.weight("bold") !important;
+            margin-bottom: 1.2rem !important;
+            padding: 0.8rem !important;
+            position: relative !important;
+
+            // Heart icon before each item
+            &::before {
+                font-family: 'Font Awesome 6 Free' !important;
+                content: "\f004" !important;
+                font-weight: 900 !important;
+                margin-right: 15px !important;
+                color: s.get-color("red") !important;
+                font-size: 1.5rem !important;
+            }
+        }
+    }
+}
+
+// =============================================================================
+// CLINICAL NOTES
+// =============================================================================
+// Informational notes with special styling
+.clinical-note {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid s.get-color("yellow");
+    padding: 1.25rem;
+    border-radius: 10px;
+    margin-top: 1.5rem;
+    box-shadow: $card-shadow;
+
+    i {
+        color: s.get-color("red");
+        margin-right: 0.5rem;
+    }
+
+    strong {
+        color: s.get-color("deep-blue");
+    }
+}
+
+// =============================================================================
+// SPECIAL SLIDES
+// =============================================================================
+// These slides have unique gradient backgrounds
+
+// Summary slide with blue gradient
+.summary-slide {
+    background: linear-gradient(135deg, s.get-color("deep-blue"), s.get-color("light-blue")) !important;
+    color: white;
+}
+
+// Implementation slide with sage to vivid gradient
+.implementation-slide {
+    background: linear-gradient(135deg, get-slide-bg(), s.get-color("vivid")) !important;
+}
+
+// =============================================================================
+// RESPONSIVE DESIGN
+// =============================================================================
+// Adjustments for smaller screens
+@media (max-width: 768px) {
+    .section-header {
+        padding: 1rem;
+
+        i {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+    }
+
+    .question-card {
+        padding: 1.25rem;
+
+        h4,
+        strong {
+            font-size: 1.05rem;
+        }
+
+        em {
+            font-size: 0.9rem;
+        }
+    }
+}

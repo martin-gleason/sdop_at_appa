@@ -18,8 +18,7 @@ format:
     preload-iframes: false
     theme: 
       - simple
-      - styles/sdop_custom.scss
-      - styles/assessment_styles.scss
+      - styles/sdop_custom_with_assessments_styles.scss
 ---
 
 ## Who are we {.head_shot}
@@ -280,6 +279,10 @@ leaflet() |>
 :::
 ::::::
 
+::: footer
+{{<fa copyright regular>}} 2025 Dr. Kisha Roberts-Tabb
+:::
+
 ::: clinical-note
 <i class="fas fa-info-circle"></i> **Clinical Significance:** Employment stability strongly predicts probation success rates and reduces recidivism risk.
 :::
@@ -312,6 +315,10 @@ leaflet() |>
 :::
 ::::::::
 
+::: footer
+{{<fa copyright regular>}} 2025 Dr. Kisha Roberts-Tabb
+:::
+
 # Education {.education-section}
 
 ## <i class="fas fa-graduation-cap"></i> Education {.section-header .education}
@@ -340,6 +347,10 @@ leaflet() |>
 :::
 ::::::::
 
+::: footer
+{{<fa copyright regular>}} 2025 Dr. Kisha Roberts-Tabb
+:::
+
 # Community & Social Context Part- Part 1 {.community-section}
 
 ## <i class="fas fa-users"></i> Community & Social Context {.section-header .community}
@@ -359,6 +370,10 @@ leaflet() |>
 **Section Maximum: 4 points**
 :::
 ::::::
+
+::: footer
+{{<fa copyright regular>}} 2025 Dr. Kisha Roberts-Tabb
+:::
 
 # Community & Social Context - Part 2 {.community-section}
 
@@ -384,6 +399,10 @@ leaflet() |>
 :::
 :::::::
 
+::: footer
+{{<fa copyright regular>}} 2025 Dr. Kisha Roberts-Tabb
+:::
+
 # Health Care {.healthcare-section}
 
 ## <i class="fas fa-stethoscope"></i> Health Care {.section-header .healthcare}
@@ -408,6 +427,10 @@ leaflet() |>
 :::
 :::::::
 
+::: footer
+{{<fa copyright regular>}} 2025 Dr. Kisha Roberts-Tabb
+:::
+
 ::: clinical-note
 <i class="fas fa-info-circle"></i> **Clinical Note:** Healthcare access significantly impacts ability to address underlying issues affecting behavior.
 :::
@@ -431,6 +454,10 @@ leaflet() |>
 **Section Maximum: 4 points**
 :::
 ::::::
+
+::: footer
+{{<fa copyright regular>}} 2025 Dr. Kisha Roberts-Tabb
+:::
 
 ::: clinical-note
 <i class="fas fa-info-circle"></i> **Research Finding:** Food insecurity correlates with increased stress and behavioral challenges affecting probation compliance.
@@ -472,6 +499,10 @@ leaflet() |>
 :::
 :::::::::::
 
+::: footer
+{{<fa copyright regular>}} 2025 Dr. Kisha Roberts-Tabb
+:::
+
 # Assessment Summary {.summary-slide}
 
 ## <i class="fas fa-chart-bar"></i> Scoring Interpretation
@@ -504,28 +535,148 @@ Extensive intervention needs, immediate comprehensive support
 **Total Possible Score: 54 points**
 :::
 
+::: footer
+{{<fa copyright regular>}} 2025 Dr. Kisha Roberts-Tabb
+:::
+
+# What Success Looks Like{.default-override}
+
+## 
+```{r}
+print(1+1)
+```
+
+##
+
+```{r}
+#| label: success
+#| echo: false
+#| fig-width: 16
+#| fig-height: 10
+#| out-width: "100%"
+#| out-height: "80vh"
+
+library(here)
+library(leaflet)
+library(sf)
+library(RColorBrewer)
+library(tidyverse)
+
+map_data <- read_rds(here("inputs", "map_data.RDS"))
+
+
+# Load Data 
+data_pal <- colorFactor(palette = "magma", domain = map_data$zip)
+
+# Create a colorblind-safe palette for success rates
+success_pal <- colorNumeric(
+  palette = "RdYlBu", # Red-Yellow-Blue (colorblind safe)
+  domain = c(0, 1),
+  reverse = TRUE # Red = low success, Blue = high success
+)
+
+# Create the leaflet map
+success_map <- leaflet(map_data) |>
+  addTiles() |>
+  addPolygons(
+    fillColor = ~ ifelse(
+      is.na(success_rate),
+      "#808080",
+      success_pal(success_rate)
+    ),
+    weight = 2,
+    opacity = 1,
+    color = "white",
+    dashArray = "3",
+    fillOpacity = 0.7,
+    highlight = highlightOptions(
+      weight = 4,
+      color = "#666",
+      dashArray = "",
+      fillOpacity = 0.9,
+      bringToFront = TRUE
+    ),
+    
+    # Popup information
+    popup = ~ paste0(
+      "<strong>Zip Code: </strong>",
+      zip,
+      "<br/>",
+      "<strong>Total Cases: </strong>",
+      ifelse(is.na(total_cases), "No data", total_cases),
+      "<br/>",
+      "<strong>Success Rate: </strong>",
+      ifelse(
+        is.na(success_rate),
+        "No data",
+        paste0(round(success_rate * 100, 1), "%")
+      )
+    ),
+    
+    # Hover labels
+    label = ~ paste(
+      "Zip:",
+      zip,
+      "| Success Rate:",
+      ifelse(
+        is.na(success_rate),
+        "No data",
+        paste0(round(success_rate * 100, 1), "%")
+      )
+    ),
+    labelOptions = labelOptions(
+      style = list("font-weight" = "normal", padding = "3px 8px"),
+      textsize = "15px",
+      direction = "auto"
+    )
+  ) |>
+  
+  # Add legend
+  addLegend(
+    pal = success_pal,
+    values = ~success_rate,
+    opacity = 0.7,
+    title = "Success Rate",
+    position = "bottomright",
+    labFormat = labelFormat(suffix = "%", transform = function(x) x * 100),
+    na.label = "No Data"
+  ) |>
+  
+  # Set view to Chicago
+  setView(lng = -87.65, lat = 41.85, zoom = 11) |>
+  
+  # Add a title
+  addControl(
+    html = "<h3>Cook County Probation Success Rates by Zip Code, Jan 2025 to June 2025</h3>",
+    position = "topright"
+  )
+
+# Display the map
+success_map
+```
+
 # Next Steps {.default-override}
 
 ## Care and Assessment Center: Family Rooom {transition="fade-in slide-out"}
 
-![Copywrite Dr Kisha Roberts-Tabb](imgs/family_1.png)
+![{{<fa copyright regular>}} 2025 Dr. Kisha Roberts-Tabb](imgs/family_1.png)
 
 ## Care and Assessment Center: Family Room {transition="fade-in slide-out"}
 
-![Copywrite Dr Kisha Roberts-Tabb](imgs/family_2.png)
+![{{<fa copyright regular>}} 2025 Dr. Kisha Roberts-Tabb](imgs/family_2.png)
 
 ## Care and Assessment Center: Oasis {transition="fade-in slide-out"}
 
-![Copywrite Dr Kisha Roberts-Tabb](imgs/oasis_1.png)
+![{{<fa copyright regular>}} 2025 Dr. Kisha Roberts-Tabb](imgs/oasis_1.png)
 
 ## Care and Assessment Center: Oasis {transition="fade-in slide-out"}
 
-![Copywrite Dr Kisha Roberts-Tabb](imgs/oasis_2.png)
+![{{<fa copyright regular>}} 2025 Dr. Kisha Roberts-Tabb](imgs/oasis_2.png)
 
 ## Thank You
 
-:::::: {.columns}
-::::: {.column width="30%"}
+:::::: columns
+:::: {.column width="30%"}
 ::: thank-you
 -   The Honorable Timothy Evans
 -   The Honorable Donna Cooper
@@ -536,11 +687,9 @@ Extensive intervention needs, immediate comprehensive support
 -   The SDOP Team
 -   And You!
 :::
-:::
+::::
 
 ::: {.column width="70%"}
 ![The authors](imgs/thank-you.jpeg)
 :::
-
 ::::::
-<!-- end columns -->

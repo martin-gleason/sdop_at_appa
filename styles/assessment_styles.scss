@@ -1,24 +1,15 @@
 /*-- scss:uses --*/
 @use "./_styles.scss" as st;
 
-/*-- scss:defaults --*/
-$body-color: st.get-color("black");
-$headings-color: st.get-color("red");
-
 /*-- scss:rules --*/
+
+// All Font Awesome icons use black
 .fas,
 .fa {
   color: st.get-color("black") !important;
 }
 
-.reveal .slide h1,
-.reveal .slide h2,
-.reveal .slide h3 {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 700;
-}
-
-// Section headers
+// Section headers ONLY - these get category colors
 .section-header {
   padding: 1.5rem;
   border-radius: 15px;
@@ -27,6 +18,12 @@ $headings-color: st.get-color("red");
   text-align: center;
   margin-bottom: 2rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+  i {
+    margin-right: 1rem;
+    font-size: 2rem;
+    color: st.get-color("black") !important;
+  }
 
   &.economic {
     background: st.get-color("green");
@@ -49,87 +46,51 @@ $headings-color: st.get-color("red");
   }
 
   &.food {
-    background: #B8860B;
+    background: st.get-color("yellow");
   }
 
   &.public-safety {
-    background: st.get-color("moss");
-  }
-
-  i {
-    margin-right: 1rem;
-    font-size: 2rem;
-    color: st.get-color("black") !important;
+    background: st.get-color("vivid");
   }
 }
 
-// Section backgrounds - Fixed: Removed & from top level
-.economic-section {
-  background: linear-gradient(135deg, rgba(34, 139, 34, 0.1), rgba(34, 139, 34, 0.05));
-}
+// Question cards - white background with category-colored headings
+.assessment-questions .question-card {
+  background: white !important;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #2c3e50 !important;
+  font-size: 1rem;
+  line-height: 1.4;
 
-.neighborhood-section {
-  background: linear-gradient(135deg, rgba(80, 162, 167, 0.1), rgba(80, 162, 167, 0.05));
-}
-
-.education-section {
-  background: linear-gradient(135deg, rgba(0, 6, 177, 0.1), rgba(0, 6, 177, 0.05));
-}
-
-.community-section {
-  background: linear-gradient(135deg, rgba(0, 128, 128, 0.1), rgba(0, 128, 128, 0.05));
-}
-
-.healthcare-section {
-  background: linear-gradient(135deg, rgba(155, 41, 21, 0.1), rgba(155, 41, 21, 0.05));
-}
-
-.food-section {
-  background: linear-gradient(135deg, rgba(184, 134, 11, 0.1), rgba(184, 134, 11, 0.05));
-}
-
-.safety-section {
-  background: linear-gradient(135deg, rgba(89, 95, 57, 0.1), rgba(89, 95, 57, 0.05));
-}
-
-// Assessment questions
-.assessment-questions {
-  .question-card {
-    background: white !important;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    padding: 1.5rem;
-    margin: 1rem 0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    color: #2c3e50 !important;
-    font-size: 1rem;
-    line-height: 1.4;
-
-    h4,
-    strong {
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    em {
-      font-size: 0.9rem;
-      font-style: italic;
-      color: #2c3e50 !important;
-    }
-  }
-
-  .score-info {
-    background: st.get-color("light-blue");
-    color: white;
-    padding: 1rem;
-    border-radius: 8px;
-    text-align: center;
+  h4,
+  strong {
     font-weight: 700;
-    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  em {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #2c3e50 !important;
   }
 }
 
-// Section-specific heading colors - Fixed: Individual rules instead of @each
+// Score info boxes
+.assessment-questions .score-info {
+  background: st.get-color("light-blue");
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 700;
+  margin-top: 1.5rem;
+}
+
+// Category-colored headings for question cards
 .economic-section .question-card strong,
 .economic-section .question-card h4 {
   color: st.get-color("green") !important;
@@ -157,14 +118,15 @@ $headings-color: st.get-color("red");
 
 .food-section .question-card strong,
 .food-section .question-card h4 {
-  color: #B8860B !important;
+  color: st.get-color("yellow") !important;
 }
 
 .safety-section .question-card strong,
 .safety-section .question-card h4 {
-  color: st.get-color("moss") !important;
+  color: st.get-color("vivid") !important;
 }
 
+// Clinical notes
 .clinical-note {
   background: rgba(233, 180, 76, 0.2);
   border: 1px solid st.get-color("yellow");
@@ -182,35 +144,6 @@ $headings-color: st.get-color("red");
   }
 }
 
-// Fixed: Wrapped in proper selector
-.summary-slide {
-  background: linear-gradient(135deg, st.get-color("deep-blue"), st.get-color("light-blue"));
-  color: white;
-}
-
-.scoring-guide .risk-level {
-  padding: 1rem;
-  margin: 0.5rem 0;
-  border-radius: 8px;
-  font-weight: 600;
-
-  &.low-risk {
-    background: rgba(34, 139, 34, 0.8);
-  }
-
-  &.moderate-risk {
-    background: rgba(233, 180, 76, 0.8);
-  }
-
-  &.high-risk {
-    background: rgba(155, 41, 21, 0.8);
-  }
-
-  &.very-high-risk {
-    background: rgba(89, 95, 57, 0.8);
-  }
-}
-
 .total-possible {
   background: rgba(255, 255, 255, 0.2);
   padding: 1rem;
@@ -221,53 +154,12 @@ $headings-color: st.get-color("red");
   margin-top: 1.5rem;
 }
 
-// Fixed: Wrapped in proper selector
-.implementation-slide {
-  background: linear-gradient(135deg, st.get-color("sage"), st.get-color("moss"));
-}
-
-.implementation-content .guideline-card {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 1rem;
-  margin: 0.5rem 0;
-  border-radius: 8px;
-  border-left: 4px solid st.get-color("green");
-
-  strong {
-    color: st.get-color("deep-blue");
-  }
-}
-
 @media (max-width: 768px) {
   .section-header {
     padding: 1rem;
-
-    i {
-      font-size: 1.5rem;
-      margin-right: 0.5rem;
-    }
   }
 
   .question-card {
     padding: 1rem;
   }
-}
-
-.reveal .slide {
-  ul li {
-    margin-bottom: 0.5rem;
-  }
-
-  strong {
-    color: st.get-color("deep-blue");
-  }
-
-  em {
-    color: #2c3e50;
-  }
-}
-
-.reveal .slide-number {
-  font-family: "Montserrat", sans-serif;
-  font-size: 0.8rem;
 }
